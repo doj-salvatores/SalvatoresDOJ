@@ -24,6 +24,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes glow{0%,100%{box-shadow:0 0 20px rgba(212,168,67,.2)}50%{box-shadow:0 0 40px rgba(212,168,67,.4)}}
 @keyframes pulse2{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
 
 .btn{padding:11px 22px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:8px;transition:all .3s}
 .bp{background:linear-gradient(135deg,var(--g),#c4942f);color:#000;font-weight:800}.bp:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(212,168,67,.4)}
@@ -31,7 +32,11 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-
 .bd{background:linear-gradient(135deg,#e74c5a,#c0392b);color:#fff;padding:7px 14px;font-size:12px;border-radius:8px}.bd:hover{box-shadow:0 4px 15px rgba(231,76,90,.4)}
 .bs{background:linear-gradient(135deg,#34c77b,#27ae60);color:#fff;padding:7px 14px;font-size:12px;border-radius:8px}
 .ba{background:rgba(255,255,255,.05);color:var(--tx);border:1px solid var(--bd);padding:7px 14px;font-size:12px;border-radius:8px}.ba:hover{background:var(--g);color:#000;border-color:var(--g)}
-.bedit{background:linear-gradient(135deg,var(--bl),#2563eb);color:#fff;padding:6px 12px;font-size:11px;border-radius:6px;border:none;cursor:pointer;font-weight:700}
+.bedit{background:linear-gradient(135deg,var(--bl),#2563eb);color:#fff;padding:6px 11px;font-size:11px;border-radius:6px;border:none;cursor:pointer;font-weight:700;margin-right:5px}
+.bview{background:linear-gradient(135deg,var(--gr),#27ae60);color:#fff;padding:6px 11px;font-size:11px;border-radius:6px;border:none;cursor:pointer;font-weight:700}
+.bview:hover{box-shadow:0 4px 12px rgba(52,199,123,.4)}
+.bname{background:linear-gradient(135deg,var(--pr),#9333ea);color:#fff;padding:6px 11px;font-size:11px;border-radius:6px;border:none;cursor:pointer;font-weight:700}
+.bname:hover{box-shadow:0 4px 12px rgba(168,85,247,.4)}
 .bf{width:100%;justify-content:center;padding:14px;font-size:15px}
 
 .tg{padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;display:inline-block}
@@ -59,16 +64,6 @@ header{background:linear-gradient(180deg,rgba(15,23,41,.95),rgba(8,15,30,.98));c
 .stats-section{background:rgba(15,23,41,.6);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:55px 5%;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:30px;text-align:center}
 .stat-item h2{font-size:40px;font-weight:900;background:linear-gradient(135deg,var(--g),var(--gb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
 .stat-item p{font-size:12px;color:var(--txm);letter-spacing:1px}
-
-.roles-section{padding:80px 5% 60px}
-.section-header{text-align:center;margin-bottom:50px}
-.section-header h3{font-size:32px;font-weight:900;background:linear-gradient(90deg,#fff,var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.section-header p{color:var(--txm);font-size:14px}
-.roles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;max-width:1400px;margin:0 auto}
-.role-card{background:rgba(22,32,56,.6);border:1px solid var(--bd);border-radius:16px;padding:35px 25px;text-align:center;cursor:pointer;transition:all .4s}
-.role-card:hover{transform:translateY(-8px);border-color:rgba(212,168,67,.3)}
-.role-card .r-icon{width:70px;height:70px;background:rgba(212,168,67,.15);border:1px solid rgba(212,168,67,.2);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;color:var(--g)}
-.role-card h4{font-size:16px;margin-bottom:10px}.role-card p{font-size:12px;color:var(--txm)}
 
 .auth-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:30px 20px}
 .auth-box{background:rgba(22,32,56,.5);backdrop-filter:blur(30px);padding:40px;border-radius:20px;width:100%;max-width:500px;border:1px solid var(--bd);box-shadow:0 25px 80px rgba(0,0,0,.5)}
@@ -144,8 +139,14 @@ td{padding:12px 14px;border-bottom:1px solid var(--bd);font-size:12px;color:var(
 
 .modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);z-index:999;display:none;align-items:center;justify-content:center;padding:20px}
 .modal.a{display:flex}
-.modal-box{background:rgba(15,23,41,.98);border:1px solid rgba(212,168,67,.3);border-radius:20px;padding:30px;width:100%;max-width:600px;max-height:85vh;overflow-y:auto}
+.modal-box{background:rgba(15,23,41,.98);border:1px solid rgba(212,168,67,.3);border-radius:20px;padding:30px;width:100%;max-width:650px;max-height:85vh;overflow-y:auto}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:15px;border-top:1px solid var(--bd)}
+
+.view-item{background:rgba(255,255,255,.03);padding:14px 18px;border-radius:10px;margin-bottom:12px;border-right:3px solid var(--g)}
+.view-item .lbl{font-size:11px;color:var(--g);font-weight:700;margin-bottom:6px;display:block}
+.view-item .val{font-size:14px;color:var(--tx);line-height:1.8;word-break:break-word}
+.view-item .val.big{font-size:16px;font-weight:700}
+.view-desc{background:rgba(0,0,0,.3);padding:18px;border-radius:10px;margin-top:10px;line-height:2;font-size:14px;color:var(--tx);white-space:pre-wrap;max-height:300px;overflow-y:auto;border:1px solid var(--bd)}
 
 .tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .tag-chip{background:var(--ggl);color:var(--g);border:1px solid rgba(212,168,67,.3);padding:7px 14px;border-radius:20px;font-size:12px;display:inline-flex;align-items:center;gap:8px}
@@ -163,13 +164,28 @@ td{padding:12px 14px;border-bottom:1px solid var(--bd);font-size:12px;color:var(
 input:checked+.sl2{background:var(--g)}
 input:checked+.sl2:before{transform:translateX(22px)}
 
+/* ✨ استایل جدید اعلانات */
+.ann-item{background:linear-gradient(135deg,rgba(212,168,67,.08),rgba(212,168,67,.03));border:1px solid rgba(212,168,67,.2);border-right:4px solid var(--g);border-radius:12px;padding:18px 20px;margin-bottom:14px;animation:slideIn .3s;position:relative}
+.ann-item:hover{border-color:rgba(212,168,67,.4);background:linear-gradient(135deg,rgba(212,168,67,.12),rgba(212,168,67,.05))}
+.ann-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:10px}
+.ann-sender{display:flex;align-items:center;gap:10px}
+.ann-sender .ann-icon{width:36px;height:36px;background:var(--ggl);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--g);font-size:14px;border:1px solid rgba(212,168,67,.3)}
+.ann-sender .ann-info strong{font-size:13px;color:var(--tx);display:block}
+.ann-sender .ann-info small{font-size:10px;color:var(--txm)}
+.ann-time{font-size:10px;color:var(--txm);background:rgba(0,0,0,.3);padding:4px 10px;border-radius:15px;white-space:nowrap}
+.ann-text{font-size:14px;color:var(--tx);line-height:1.9;padding:12px 15px;background:rgba(0,0,0,.2);border-radius:8px;margin-top:10px;white-space:pre-wrap;word-break:break-word}
+.ann-del{position:absolute;top:15px;left:15px;background:var(--r);color:#fff;border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:11px;display:none;align-items:center;justify-content:center}
+.ann-item:hover .ann-del{display:flex}
+.ann-del:hover{box-shadow:0 4px 12px rgba(231,76,90,.5)}
+.ann-empty{text-align:center;padding:50px 20px;color:var(--txm);font-size:13px}
+.ann-empty i{font-size:45px;color:rgba(212,168,67,.2);margin-bottom:12px;display:block}
+
 footer{background:rgba(8,15,30,.9);color:var(--txm);padding:30px 5%;text-align:center;border-top:1px solid var(--bd);font-size:11px}
 .footer-maker{color:var(--g);font-weight:800;margin-top:8px;display:block}
 </style>
 </head>
 <body>
 
-<!-- صفحه اصلی -->
 <div id="landing" class="v a">
 <div class="top-bar"><div><i class="fa-solid fa-scale-balanced"></i> سامانه رسمی وزارت دادگستری</div><div><i class="fa-solid fa-globe"></i> متصل به دیتابیس ابری زنده 🟢</div></div>
 <header>
@@ -193,7 +209,6 @@ footer{background:rgba(8,15,30,.9);color:var(--txm);padding:30px 5%;text-align:c
 </footer>
 </div>
 
-<!-- ثبت‌نام -->
 <div id="regV" class="v"><div class="auth-page"><div class="auth-box">
 <div class="auth-header"><div class="sl" style="margin:0 auto 15px"><i class="fa-solid fa-scale-balanced"></i></div><h2>ثبت‌نام در سامانه</h2></div>
 <div id="rErr" class="em"></div><div id="rSuc" class="sm2"></div>
@@ -205,7 +220,6 @@ footer{background:rgba(8,15,30,.9);color:var(--txm);padding:30px 5%;text-align:c
 <div style="text-align:center;margin-top:16px;font-size:12px"><a onclick="sv('loginV')" style="color:var(--g);cursor:pointer">ورود به حساب</a></div>
 </div></div></div>
 
-<!-- ورود -->
 <div id="loginV" class="v"><div class="auth-page"><div class="auth-box">
 <div class="auth-header"><div class="sl" style="margin:0 auto 15px"><i class="fa-solid fa-scale-balanced"></i></div><h2>ورود به سامانه</h2></div>
 <div id="lErr" class="em"></div>
@@ -215,13 +229,10 @@ footer{background:rgba(8,15,30,.9);color:var(--txm);padding:30px 5%;text-align:c
 <div style="text-align:center;margin-top:16px;font-size:12px"><a onclick="sv('regV')" style="color:var(--g);cursor:pointer">ثبت‌نام</a></div>
 </div></div></div>
 
-<!-- انتظار -->
 <div id="waitV" class="v"><div class="auth-page"><div class="auth-box" style="text-align:center"><h2>در انتظار تایید مدیریت</h2><p style="color:var(--txm);font-size:13px;margin:15px 0">ثبت‌نام شما ثبت شد. منتظر تایید باشید.</p><button class="btn bo" onclick="sv('loginV')">بازگشت</button></div></div></div>
 
-<!-- حالت تعمیرات -->
 <div id="maintV" class="v"><div class="auth-page"><div class="auth-box" style="text-align:center"><div class="sl" style="margin:0 auto 15px;background:linear-gradient(135deg,var(--or),#e67e22)"><i class="fa-solid fa-wrench"></i></div><h2>سامانه در حال تعمیرات</h2><p style="color:var(--txm);font-size:13px;margin:15px 0">سایت موقتاً در دسترس نیست.</p><button class="btn bo" onclick="sv('loginV')">ورود مدیر</button></div></div></div>
 
-<!-- پنل اصلی -->
 <div id="P_main" class="v">
 <div class="pc"><aside class="sb">
 <div class="sh"><div class="ss" id="pIcon"></div><h3 id="pRoleName">پنل</h3><p>DOJ SYSTEM</p></div>
@@ -252,23 +263,23 @@ let SETTINGS = null;
 
 const DEFAULT_ROLES = {
     admin: {name:'مدیر سایت', icon:'fa-user-tie', perms:['all']},
-    attorney: {name:'دادستان کل', icon:'fa-gavel', perms:['pending','users_manage','cases','cases_edit','inter','inter_edit','reports','reports_edit','pun','blacklist','members','tickets_view','chat','ann_send']},
-    command: {name:'کامند تیم', icon:'fa-star', perms:['cases','cases_edit','inter','inter_edit','reports','reports_edit','pun','blacklist','members','tickets_view','chat','ann_view']},
+    attorney: {name:'دادستان کل', icon:'fa-gavel', perms:['pending','users_manage','cases','cases_edit','inter','inter_edit','reports','reports_edit','pun','blacklist','members','tickets_view','chat','ann_send','ann_del']},
+    command: {name:'کامند تیم', icon:'fa-star', perms:['cases','cases_edit','inter','inter_edit','reports','reports_edit','pun','blacklist','members','tickets_view','chat','ann_send','ann_del']},
     staff: {name:'کارمند وزارت', icon:'fa-briefcase', perms:['cases','cases_edit','inter','inter_edit','reports','reports_edit','pun_view','blacklist','tickets_send','activity','chat','ann_view']},
     military: {name:'نیروی نظامی', icon:'fa-shield', perms:['inter','blacklist','tickets_send']},
     citizen: {name:'شهروند', icon:'fa-user', perms:['tickets_send']}
 };
 
 const ALL_PERMS = {
-    pending:'تایید کاربران جدید', users_manage:'تغییر رول کاربران',
+    pending:'تایید کاربران جدید', users_manage:'تغییر رول کاربران', users_rename:'تغییر نام کاربران',
     cases:'پرونده درون‌ارگانی', cases_edit:'ویرایش پرونده درون‌ارگانی',
     inter:'پرونده بین‌ارگانی', inter_edit:'ویرایش پرونده بین‌ارگانی',
     reports:'گزارش‌ها', reports_edit:'ویرایش گزارش‌ها',
     pun:'صدور پانیشمنت', pun_view:'فقط مشاهده پانیشمنت',
-    blacklist:'بلک‌لیست (ثبت و مشاهده)', members:'مشاهده اعضا',
+    blacklist:'بلک‌لیست', members:'مشاهده اعضا',
     tickets_view:'مشاهده و پاسخ تیکت', tickets_send:'ارسال تیکت',
     activity:'ثبت اکتیویتی', chat:'چت زنده',
-    ann_send:'ارسال اعلان', ann_view:'مشاهده اعلان'
+    ann_send:'ارسال اعلان', ann_view:'مشاهده اعلان', ann_del:'حذف اعلان'
 };
 
 const DEFAULT_SETTINGS = {
@@ -409,18 +420,18 @@ function buildUI(){
 
     if(has('cases')){
         m += `<a onclick="shT(event,'cases')"><i class="fa-solid fa-folder"></i> پرونده درون‌ارگانی</a>`;
-        c += `<div id="cases" class="t"><div class="pk"><h3>ثبت پرونده</h3><div class="fg"><label>عنوان</label><input id="inCsT"></div><div class="fg"><label>شرح</label><textarea id="inCsD" rows="4"></textarea></div><button class="btn bp" onclick="saveD('cases','inCsT','inCsD')">ثبت</button></div><div class="pk"><h3>لیست</h3><table><thead><tr><th>#</th><th>عنوان</th><th>توسط</th><th>تاریخ</th><th>عمل</th></tr></thead><tbody id="casesTbl"></tbody></table></div></div>`;
+        c += `<div id="cases" class="t"><div class="pk"><h3>ثبت پرونده</h3><div class="fg"><label>عنوان</label><input id="inCsT"></div><div class="fg"><label>شرح</label><textarea id="inCsD" rows="4"></textarea></div><button class="btn bp" onclick="saveD('cases','inCsT','inCsD')">ثبت</button></div><div class="pk"><h3>لیست</h3><table><thead><tr><th>#</th><th>عنوان</th><th>توسط</th><th>تاریخ</th><th>عملیات</th></tr></thead><tbody id="casesTbl"></tbody></table></div></div>`;
     }
 
     if(has('inter')){
         m += `<a onclick="shT(event,'inter')"><i class="fa-solid fa-arrows-left-right"></i> پرونده بین‌ارگانی</a>`;
-        c += `<div id="inter" class="t"><div class="pk"><h3>ارسال به وزارت دادگستری</h3><div class="fg"><label>عنوان</label><input id="inInT"></div><div class="fg"><label>ارگان مقصد</label><input value="وزارت دادگستری" disabled style="background:rgba(212,168,67,.1);color:var(--g)"></div><div class="fg"><label>شرح</label><textarea id="inInD" rows="4"></textarea></div><button class="btn bp" onclick="saveD('inter','inInT','inInD')">ارسال</button></div><div class="pk"><h3>لیست</h3><table><thead><tr><th>#</th><th>عنوان</th><th>توسط</th><th>تاریخ</th><th>عمل</th></tr></thead><tbody id="interTbl"></tbody></table></div></div>`;
+        c += `<div id="inter" class="t"><div class="pk"><h3>ارسال به وزارت دادگستری</h3><div class="fg"><label>عنوان</label><input id="inInT"></div><div class="fg"><label>ارگان مقصد</label><input value="وزارت دادگستری" disabled style="background:rgba(212,168,67,.1);color:var(--g)"></div><div class="fg"><label>شرح</label><textarea id="inInD" rows="4"></textarea></div><button class="btn bp" onclick="saveD('inter','inInT','inInD')">ارسال</button></div><div class="pk"><h3>لیست</h3><table><thead><tr><th>#</th><th>عنوان</th><th>توسط</th><th>تاریخ</th><th>عملیات</th></tr></thead><tbody id="interTbl"></tbody></table></div></div>`;
     }
 
     if(has('reports')){
         const typesOpt = SETTINGS.reportTypes.map(x=>`<option>${x}</option>`).join('');
         m += `<a onclick="shT(event,'reports')"><i class="fa-solid fa-file-lines"></i> گزارش‌ها</a>`;
-        c += `<div id="reports" class="t"><div class="pk"><h3>ثبت گزارش</h3><div class="fg2"><div class="fg"><label>نوع</label><select id="inRpS">${typesOpt}</select></div><div class="fg"><label>عنوان</label><input id="inRpT"></div></div><div class="fg"><label>شرح</label><textarea id="inRpD" rows="4"></textarea></div><button class="btn bp" onclick="saveD('reports','inRpT','inRpD','inRpS')">ثبت</button></div><div class="pk"><h3>لیست گزارش‌ها</h3><table><thead><tr><th>#</th><th>نوع</th><th>عنوان</th><th>توسط</th><th>عمل</th></tr></thead><tbody id="reportsTbl"></tbody></table></div></div>`;
+        c += `<div id="reports" class="t"><div class="pk"><h3>ثبت گزارش</h3><div class="fg2"><div class="fg"><label>نوع</label><select id="inRpS">${typesOpt}</select></div><div class="fg"><label>عنوان</label><input id="inRpT"></div></div><div class="fg"><label>شرح</label><textarea id="inRpD" rows="4"></textarea></div><button class="btn bp" onclick="saveD('reports','inRpT','inRpD','inRpS')">ثبت</button></div><div class="pk"><h3>لیست گزارش‌ها</h3><table><thead><tr><th>#</th><th>نوع</th><th>عنوان</th><th>توسط</th><th>عملیات</th></tr></thead><tbody id="reportsTbl"></tbody></table></div></div>`;
     }
 
     if(has('pun') || has('pun_view')){
@@ -428,19 +439,34 @@ function buildUI(){
         m += `<a onclick="shT(event,'pun')"><i class="fa-solid fa-gavel"></i> پانیشمنت</a>`;
         let pHtml = '';
         if(has('pun')) pHtml += `<div class="pk"><h3>صدور پانیشمنت</h3><div class="fg2"><div class="fg"><label>کاربر</label><input id="inPunU"></div><div class="fg"><label>نوع</label><select id="inPunS">${typesOpt}</select></div></div><div class="fg"><label>دلیل</label><textarea id="inPunD" rows="3"></textarea></div><button class="btn bd" onclick="saveD('punishments','inPunU','inPunD','inPunS')">صدور</button></div>`;
-        pHtml += `<div class="pk"><h3>لیست پانیشمنت‌ها${has('pun_view')?' (فقط مشاهده)':''}</h3><table><thead><tr><th>#</th><th>کاربر</th><th>نوع</th><th>دلیل</th><th>توسط</th></tr></thead><tbody id="punTbl"></tbody></table></div>`;
+        pHtml += `<div class="pk"><h3>لیست پانیشمنت‌ها${has('pun_view')?' (فقط مشاهده)':''}</h3><table><thead><tr><th>#</th><th>کاربر</th><th>نوع</th><th>توسط</th><th>عملیات</th></tr></thead><tbody id="punTbl"></tbody></table></div>`;
         c += `<div id="pun" class="t">${pHtml}</div>`;
     }
 
     if(has('blacklist')){
         const typesOpt = SETTINGS.blTypes.map(x=>`<option>${x}</option>`).join('');
         m += `<a onclick="shT(event,'bl')"><i class="fa-solid fa-ban"></i> بلک‌لیست</a>`;
-        c += `<div id="bl" class="t"><div class="pk"><h3>افزودن به بلک‌لیست</h3><div class="fg2"><div class="fg"><label>شخص</label><input id="inBlU"></div><div class="fg"><label>نوع جرم</label><select id="inBlS">${typesOpt}</select></div></div><div class="fg"><label>دلیل</label><textarea id="inBlD" rows="3"></textarea></div><button class="btn bd" onclick="saveD('blacklist','inBlU','inBlD','inBlS')">ثبت</button></div><div class="pk"><h3>لیست سیاه</h3><table><thead><tr><th>#</th><th>شخص</th><th>نوع</th><th>دلیل</th><th>توسط</th></tr></thead><tbody id="blTbl"></tbody></table></div></div>`;
+        c += `<div id="bl" class="t"><div class="pk"><h3>افزودن به بلک‌لیست</h3><div class="fg2"><div class="fg"><label>شخص</label><input id="inBlU"></div><div class="fg"><label>نوع جرم</label><select id="inBlS">${typesOpt}</select></div></div><div class="fg"><label>دلیل</label><textarea id="inBlD" rows="3"></textarea></div><button class="btn bd" onclick="saveD('blacklist','inBlU','inBlD','inBlS')">ثبت</button></div><div class="pk"><h3>لیست سیاه</h3><table><thead><tr><th>#</th><th>شخص</th><th>نوع</th><th>توسط</th><th>عملیات</th></tr></thead><tbody id="blTbl"></tbody></table></div></div>`;
+    }
+
+    // 📣 بخش اعلانات
+    if(has('ann_send') || has('ann_view') || isAdmin){
+        m += `<a onclick="shT(event,'anns')"><i class="fa-solid fa-bullhorn"></i> اعلانات</a>`;
+        let aHtml = '';
+        if(has('ann_send')){
+            aHtml += `<div class="pk"><h3><i class="fa-solid fa-paper-plane"></i> ارسال اعلان جدید</h3>
+            <div class="fg"><label>عنوان اعلان</label><input id="annTitle" placeholder="مثلاً: جلسه فوری امشب"></div>
+            <div class="fg"><label>متن اعلان</label><textarea id="annMsg" rows="5" placeholder="متن کامل اعلان را اینجا بنویسید..."></textarea></div>
+            <button class="btn bp" onclick="sendAnn()"><i class="fa-solid fa-bullhorn"></i> انتشار اعلان آنلاین</button>
+            </div>`;
+        }
+        aHtml += `<div class="pk"><h3><i class="fa-solid fa-megaphone"></i> اعلانات ثبت‌شده (${has('ann_send')?'ثبت و مشاهده':'فقط مشاهده'})</h3><div id="annList"></div></div>`;
+        c += `<div id="anns" class="t">${aHtml}</div>`;
     }
 
     if(has('tickets_view')){
         m += `<a onclick="shT(event,'tickets')"><i class="fa-solid fa-envelope"></i> تیکت‌ها</a>`;
-        c += `<div id="tickets" class="t"><div class="pk"><h3>تیکت‌های دریافتی</h3><table><thead><tr><th>فرستنده</th><th>موضوع</th><th>متن</th><th>پاسخ</th><th>عمل</th></tr></thead><tbody id="ticketsTbl"></tbody></table></div></div>`;
+        c += `<div id="tickets" class="t"><div class="pk"><h3>تیکت‌های دریافتی</h3><table><thead><tr><th>فرستنده</th><th>موضوع</th><th>پاسخ</th><th>عمل</th></tr></thead><tbody id="ticketsTbl"></tbody></table></div></div>`;
     }
     if(has('tickets_send') && !has('tickets_view')){
         m += `<a onclick="shT(event,'sendTicket')"><i class="fa-solid fa-envelope"></i> ارسال تیکت</a>`;
@@ -452,7 +478,6 @@ function buildUI(){
         c += `<div id="chat" class="t"><div class="chat-wrap"><div class="chat-head"><h4><span class="live-dot"></span> چت درون‌ارگانی</h4></div><div class="chat-body" id="chatBody"></div><div class="chat-foot"><input id="chatIn" onkeypress="if(event.key==='Enter')sendChat()"><button onclick="sendChat()">ارسال</button></div></div></div>`;
     }
 
-    // تب‌های سفارشی مدیر
     if(SETTINGS.customTabs){
         Object.keys(SETTINGS.customTabs).forEach(tid => {
             const tab = SETTINGS.customTabs[tid];
@@ -463,7 +488,6 @@ function buildUI(){
         });
     }
 
-    // 👑 بخش GOD MODE مدیر
     if(isAdmin){
         m += `<div class="god-section">`;
         m += `<a onclick="shT(event,'appearance')"><i class="fa-solid fa-palette"></i> 🎨 ویرایش ظاهر</a>`;
@@ -475,69 +499,61 @@ function buildUI(){
         m += `<a onclick="shT(event,'adSystem')"><i class="fa-solid fa-server"></i> 💣 سیستم</a>`;
         m += `</div>`;
 
-        // محتوای ویرایش ظاهر
         const a = SETTINGS.appearance;
-        c += `<div id="appearance" class="t"><div class="pk"><h3><i class="fa-solid fa-palette"></i> استودیو ویرایش ظاهر سایت (زنده)</h3>
+        c += `<div id="appearance" class="t"><div class="pk"><h3><i class="fa-solid fa-palette"></i> استودیو ویرایش ظاهر سایت</h3>
 <div class="fg2"><div class="fg"><label>رنگ اصلی</label><input id="appColorMain" type="color" value="${a.colorMain}"></div><div class="fg"><label>رنگ پس‌زمینه</label><input id="appColorBg" type="color" value="${a.colorBg}"></div></div>
-<div class="fg2"><div class="fg"><label>نام هدر سایت</label><input id="appSiteName" value="${a.siteName}"></div><div class="fg"><label>شعار هدر</label><input id="appSlogan" value="${a.slogan}"></div></div>
-<div class="fg"><label>آیکون مهر (FontAwesome)</label><input id="appSealIcon" value="${a.sealIcon}" placeholder="fa-scale-balanced, fa-crown, fa-shield-halved"></div>
-<div class="fg"><label>متن بج بالای هیرو</label><input id="appBadgeText" value="${a.badgeText}"></div>
-<div class="fg"><label>عنوان بزرگ هیرو (می‌توان span داشت)</label><input id="appHeroTitle" value='${a.heroTitle.replace(/'/g,"&apos;")}'></div>
+<div class="fg2"><div class="fg"><label>نام هدر</label><input id="appSiteName" value="${a.siteName}"></div><div class="fg"><label>شعار</label><input id="appSlogan" value="${a.slogan}"></div></div>
+<div class="fg"><label>آیکون مهر</label><input id="appSealIcon" value="${a.sealIcon}"></div>
+<div class="fg"><label>متن بج</label><input id="appBadgeText" value="${a.badgeText}"></div>
+<div class="fg"><label>عنوان هیرو</label><input id="appHeroTitle" value='${a.heroTitle.replace(/'/g,"&apos;")}'></div>
 <div class="fg"><label>توضیحات هیرو</label><textarea id="appHeroDesc" rows="3">${a.heroDesc}</textarea></div>
 <div class="fg2"><div class="fg"><label>متن فوتر</label><input id="appFooterText" value="${a.footerText}"></div><div class="fg"><label>متن سازنده</label><input id="appDevText" value="${a.devText}"></div></div>
-<button class="btn bp bf" onclick="saveAppearance()"><i class="fa-solid fa-globe"></i> ذخیره و انتشار آنلاین</button>
+<button class="btn bp bf" onclick="saveAppearance()">ذخیره و انتشار آنلاین</button>
 </div></div>`;
 
-        // مدیریت گزینه‌ها
         c += `<div id="adManage" class="t">
-<div class="pk"><h3><i class="fa-solid fa-file-lines"></i> انواع گزارش</h3><div style="display:flex;gap:10px"><input id="newRp" placeholder="گزارش جدید..." style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;color:var(--tx);font-family:'Vazirmatn'"><button class="btn bp" onclick="addItem('reportTypes','newRp')">افزودن</button></div><div class="tag-list" id="rpList"></div></div>
-<div class="pk"><h3><i class="fa-solid fa-gavel"></i> انواع پانیشمنت</h3><div style="display:flex;gap:10px"><input id="newPun" placeholder="پانیشمنت جدید..." style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;color:var(--tx);font-family:'Vazirmatn'"><button class="btn bp" onclick="addItem('punTypes','newPun')">افزودن</button></div><div class="tag-list" id="punList"></div></div>
-<div class="pk"><h3><i class="fa-solid fa-ban"></i> انواع جرم بلک‌لیست</h3><div style="display:flex;gap:10px"><input id="newBl" placeholder="جرم جدید..." style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;color:var(--tx);font-family:'Vazirmatn'"><button class="btn bp" onclick="addItem('blTypes','newBl')">افزودن</button></div><div class="tag-list" id="blList"></div></div>
-<div class="pk"><h3><i class="fa-solid fa-building"></i> ارگان‌ها</h3><div style="display:flex;gap:10px"><input id="newOrg" placeholder="ارگان جدید..." style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;color:var(--tx);font-family:'Vazirmatn'"><button class="btn bp" onclick="addItem('orgs','newOrg')">افزودن</button></div><div class="tag-list" id="orgList"></div></div>
+<div class="pk"><h3><i class="fa-solid fa-file-lines"></i> انواع گزارش</h3><div style="display:flex;gap:10px"><input id="newRp" style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;color:var(--tx);font-family:'Vazirmatn'"><button class="btn bp" onclick="addItem('reportTypes','newRp')">افزودن</button></div><div class="tag-list" id="rpList"></div></div>
+<div class="pk"><h3><i class="fa-solid fa-gavel"></i> انواع پانیشمنت</h3><div style="display:flex;gap:10px"><input id="newPun" style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;color:var(--tx);font-family:'Vazirmatn'"><button class="btn bp" onclick="addItem('punTypes','newPun')">افزودن</button></div><div class="tag-list" id="punList"></div></div>
+<div class="pk"><h3><i class="fa-solid fa-ban"></i> انواع جرم بلک‌لیست</h3><div style="display:flex;gap:10px"><input id="newBl" style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;color:var(--tx);font-family:'Vazirmatn'"><button class="btn bp" onclick="addItem('blTypes','newBl')">افزودن</button></div><div class="tag-list" id="blList"></div></div>
+<div class="pk"><h3><i class="fa-solid fa-building"></i> ارگان‌ها</h3><div style="display:flex;gap:10px"><input id="newOrg" style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;color:var(--tx);font-family:'Vazirmatn'"><button class="btn bp" onclick="addItem('orgs','newOrg')">افزودن</button></div><div class="tag-list" id="orgList"></div></div>
 </div>`;
 
-        // مدیریت رول‌ها
         c += `<div id="adRoles" class="t">
 <div class="pk"><h3><i class="fa-solid fa-plus"></i> ساخت رول جدید</h3>
-<div class="fg2"><div class="fg"><label>نام رول</label><input id="newRoleName" placeholder="مثلاً: بازرس"></div><div class="fg"><label>شناسه (انگلیسی)</label><input id="newRoleId" placeholder="inspector"></div></div>
+<div class="fg2"><div class="fg"><label>نام رول</label><input id="newRoleName"></div><div class="fg"><label>شناسه</label><input id="newRoleId"></div></div>
 <div class="fg"><label>آیکون</label><input id="newRoleIcon" value="fa-user-shield"></div>
-<label style="font-size:12px;color:var(--g);font-weight:700;margin:10px 0;display:block">دسترسی‌های این رول:</label>
+<label style="font-size:12px;color:var(--g);font-weight:700;margin:10px 0;display:block">دسترسی‌ها:</label>
 <div class="perm-grid" id="newPermGrid"></div>
 <button class="btn bp" style="margin-top:15px" onclick="createRole()">ساخت رول</button>
 </div>
 <div class="pk"><h3><i class="fa-solid fa-list"></i> رول‌های موجود</h3><table><thead><tr><th>نام</th><th>شناسه</th><th>آیکون</th><th>دسترسی</th><th>عمل</th></tr></thead><tbody id="rolesList"></tbody></table></div>
 </div>`;
 
-        // ویرایش دسترسی پنل‌ها
         c += `<div id="adPanels" class="t"><div class="pk"><h3><i class="fa-solid fa-table-columns"></i> ویرایش دسترسی پنل‌ها</h3><div class="fg"><label>انتخاب رول</label><select id="editRoleSel" onchange="loadRoleEdit()"></select></div><div id="roleEditBox"></div></div></div>`;
 
-        // تب‌های سفارشی
         c += `<div id="adTabs" class="t">
-<div class="pk"><h3><i class="fa-solid fa-plus-square"></i> افزودن تب سفارشی به پنل‌ها</h3>
-<div class="fg2"><div class="fg"><label>نام تب</label><input id="ctName" placeholder="مثلاً: آرشیو"></div><div class="fg"><label>آیکون</label><input id="ctIcon" value="fa-folder-plus"></div></div>
-<div class="fg"><label>برای کدام رول‌ها نمایش داده شود؟</label><div id="ctRoles"></div></div>
-<div class="fg"><label>محتوای HTML (می‌توانی HTML بنویسی)</label><textarea id="ctHtml" rows="6" placeholder='<div class="pk"><h3>عنوان</h3><p>متن...</p></div>'></textarea></div>
+<div class="pk"><h3><i class="fa-solid fa-plus-square"></i> افزودن تب سفارشی</h3>
+<div class="fg2"><div class="fg"><label>نام تب</label><input id="ctName"></div><div class="fg"><label>آیکون</label><input id="ctIcon" value="fa-folder-plus"></div></div>
+<div class="fg"><label>برای کدام رول‌ها؟</label><div id="ctRoles"></div></div>
+<div class="fg"><label>محتوای HTML</label><textarea id="ctHtml" rows="6"></textarea></div>
 <button class="btn bp" onclick="createTab()">افزودن تب</button>
 </div>
 <div class="pk"><h3><i class="fa-solid fa-list"></i> تب‌های موجود</h3><table><thead><tr><th>نام</th><th>آیکون</th><th>رول‌ها</th><th>عمل</th></tr></thead><tbody id="ctList"></tbody></table></div>
 </div>`;
 
-        // آمار داشبورد
-        c += `<div id="adStats" class="t"><div class="pk"><h3><i class="fa-solid fa-chart-column"></i> ویرایش آمار صفحه اصلی</h3>
+        c += `<div id="adStats" class="t"><div class="pk"><h3><i class="fa-solid fa-chart-column"></i> ویرایش آمار</h3>
 <div class="fg2"><div class="fg"><label>عدد ۱</label><input id="st1n" value="${SETTINGS.stats[0].n}"></div><div class="fg"><label>عنوان ۱</label><input id="st1l" value="${SETTINGS.stats[0].l}"></div></div>
 <div class="fg2"><div class="fg"><label>عدد ۳</label><input id="st3n" value="${SETTINGS.stats[2].n}"></div><div class="fg"><label>عنوان ۳</label><input id="st3l" value="${SETTINGS.stats[2].l}"></div></div>
-<button class="btn bp" onclick="saveStats()">ذخیره آمار</button>
+<button class="btn bp" onclick="saveStats()">ذخیره</button>
 </div></div>`;
 
-        // سیستم
         c += `<div id="adSystem" class="t">
 <div class="pk"><h3><i class="fa-solid fa-wrench"></i> حالت تعمیرات</h3>
-<div style="display:flex;align-items:center;justify-content:space-between;padding:15px 0"><div><h4 style="font-size:13px">فعال/غیرفعال سازی سایت</h4><p style="font-size:11px;color:var(--txm);margin-top:5px">فقط مدیر می‌تواند وارد شود</p></div><label class="sw"><input type="checkbox" id="maintToggle" ${SETTINGS.maintenance?'checked':''}><span class="sl2"></span></label></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:15px 0"><div><h4 style="font-size:13px">فعال/غیرفعال سازی سایت</h4></div><label class="sw"><input type="checkbox" id="maintToggle" ${SETTINGS.maintenance?'checked':''}><span class="sl2"></span></label></div>
 <button class="btn bp" onclick="saveMaint()">اعمال وضعیت</button>
 </div>
 <div class="pk danger"><h3><i class="fa-solid fa-triangle-exclamation"></i> منطقه خطر</h3>
-<p style="color:var(--txm);font-size:13px;margin-bottom:15px">عملیات زیر غیرقابل بازگشت است!</p>
-<button class="bd" style="padding:10px 18px;font-size:13px" onclick="resetAll()"><i class="fa-solid fa-trash"></i> ریست کامل سامانه (پاک کردن همه داده‌ها)</button>
+<button class="bd" style="padding:10px 18px;font-size:13px" onclick="resetAll()"><i class="fa-solid fa-trash"></i> ریست کامل سامانه</button>
 </div></div>`;
     }
 
@@ -583,23 +599,56 @@ function listenLive(){
             } else if(u.approved){
                 active++;
                 if(aTbl){
-                    const roleName = SETTINGS.roles[u.role] ? SETTINGS.roles[u.role].name : u.role;
-                    aTbl.innerHTML += `<tr><td>${u.ic}</td><td>${u.oc}</td><td>${u.org}</td><td>${u.rank}</td><td><select id="ch_${u.un}">${rolesOpt.replace(`value="${u.role}"`, `value="${u.role}" selected`)}</select></td><td><button class="bs" onclick="changeRole('${u.un}')">تغییر</button> ${u.role!=='admin'?`<button class="bd" onclick="delUser('${u.un}')">حذف</button>`:''}</td></tr>`;
+                    const nameBtn = isAdmin ? `<button class="bname" onclick="renameUser('${u.un}')"><i class="fa-solid fa-user-pen"></i> تغییر نام</button> ` : '';
+                    aTbl.innerHTML += `<tr><td>${u.ic}</td><td>${u.oc}</td><td>${u.org}</td><td>${u.rank}</td><td><select id="ch_${u.un}">${rolesOpt.replace(`value="${u.role}"`, `value="${u.role}" selected`)}</select></td><td style="min-width:280px"><button class="bs" onclick="changeRole('${u.un}')">تغییر رول</button> ${nameBtn}${u.role!=='admin'?`<button class="bd" onclick="delUser('${u.un}')">حذف</button>`:''}</td></tr>`;
                 }
             }
         }
         if(document.getElementById('liveUserStat')) document.getElementById('liveUserStat').innerText = active;
     });
 
-    db.ref('cases').on('value', s => renderT('casesTbl', s.val(), ['title','by','date'], 'cases', has('cases_edit')||isAdmin));
-    db.ref('inter').on('value', s => renderT('interTbl', s.val(), ['title','by','date'], 'inter', has('inter_edit')||isAdmin));
-    db.ref('reports').on('value', s => renderT('reportsTbl', s.val(), ['type','title','by'], 'reports', has('reports_edit')||isAdmin));
-    db.ref('punishments').on('value', s => renderT('punTbl', s.val(), ['user','type','desc','by'], 'punishments', false));
-    db.ref('blacklist').on('value', s => renderT('blTbl', s.val(), ['user','type','desc','by'], 'blacklist', false));
+    db.ref('cases').on('value', s => renderT('casesTbl', s.val(), ['title','by','date'], 'cases', has('cases_edit')||isAdmin, 'case'));
+    db.ref('inter').on('value', s => renderT('interTbl', s.val(), ['title','by','date'], 'inter', has('inter_edit')||isAdmin, 'inter'));
+    db.ref('reports').on('value', s => renderT('reportsTbl', s.val(), ['type','title','by'], 'reports', has('reports_edit')||isAdmin, 'report'));
+    db.ref('punishments').on('value', s => renderT('punTbl', s.val(), ['user','type','by'], 'punishments', false, 'pun'));
+    db.ref('blacklist').on('value', s => renderT('blTbl', s.val(), ['user','type','by'], 'blacklist', false, 'bl'));
     db.ref('tickets').on('value', s => {
         const tb = document.getElementById('ticketsTbl'); if(!tb) return;
         tb.innerHTML = ''; const data = s.val() || {};
-        for(let k in data){const t = data[k]; tb.innerHTML += `<tr><td>${t.by}</td><td>${t.sub}</td><td>${t.msg}</td><td>${t.reply||'—'}</td><td><button class="ba" onclick="reply('${k}')">پاسخ</button></td></tr>`;}
+        for(let k in data){const t = data[k]; tb.innerHTML += `<tr><td>${t.by}</td><td>${t.sub}</td><td>${t.reply||'<span class="tg td">پاسخ داده نشده</span>'}</td><td><button class="bview" onclick="viewTicket('${k}')"><i class="fa-solid fa-eye"></i> مشاهده</button> <button class="ba" onclick="reply('${k}')">پاسخ</button></td></tr>`;}
+    });
+
+    // 📣 گوش دادن به اعلانات
+    db.ref('announcements').on('value', s => {
+        const el = document.getElementById('annList'); if(!el) return;
+        const data = s.val() || {};
+        const keys = Object.keys(data).reverse(); // جدیدترین اول
+        if(!keys.length){
+            el.innerHTML = '<div class="ann-empty"><i class="fa-solid fa-megaphone"></i>هنوز اعلانی ثبت نشده است</div>';
+            return;
+        }
+        el.innerHTML = '';
+        keys.forEach(k => {
+            const a = data[k];
+            const roleIcon = (a.senderRole && SETTINGS.roles[a.senderRole]) ? SETTINGS.roles[a.senderRole].icon : 'fa-user';
+            const roleName = (a.senderRole && SETTINGS.roles[a.senderRole]) ? SETTINGS.roles[a.senderRole].name : (a.senderRole||'سیستم');
+            const delBtn = has('ann_del') ? `<button class="ann-del" onclick="deleteAnn('${k}')" title="حذف اعلان"><i class="fa-solid fa-xmark"></i></button>` : '';
+            el.innerHTML += `<div class="ann-item">
+                ${delBtn}
+                <div class="ann-head">
+                    <div class="ann-sender">
+                        <div class="ann-icon"><i class="fa-solid ${roleIcon}"></i></div>
+                        <div class="ann-info">
+                            <strong>${a.sender || 'ناشناس'}</strong>
+                            <small>${roleName}</small>
+                        </div>
+                    </div>
+                    <div class="ann-time">${a.date || ''}</div>
+                </div>
+                ${a.title ? `<div style="font-size:15px;font-weight:800;color:var(--g);margin:10px 0 5px"><i class="fa-solid fa-megaphone"></i> ${a.title}</div>` : ''}
+                <div class="ann-text">${a.msg||''}</div>
+            </div>`;
+        });
     });
 
     db.ref('settings').on('value', s => {
@@ -612,15 +661,60 @@ function listenLive(){
     });
 }
 
-function renderT(id, data, fields, path, edit){
+function renderT(id, data, fields, path, edit, viewType){
     const tb = document.getElementById(id); if(!tb) return; tb.innerHTML = '';
     const d = data || {}; let i = 1;
     for(let k in d){
         let tr = `<td>#${i++}</td>`;
         fields.forEach(f => tr += `<td>${d[k][f]||'—'}</td>`);
-        if(edit) tr += `<td><button class="bedit" onclick="editI('${path}','${k}')">ویرایش</button></td>`;
+        tr += `<td style="min-width:160px"><button class="bview" onclick="viewItem('${path}','${k}','${viewType}')"><i class="fa-solid fa-eye"></i> مشاهده</button>`;
+        if(edit) tr += ` <button class="bedit" onclick="editI('${path}','${k}')"><i class="fa-solid fa-pen"></i> ویرایش</button>`;
+        tr += `</td>`;
         tb.innerHTML += `<tr>${tr}</tr>`;
     }
+}
+
+function viewItem(path, key, type){
+    db.ref(path + '/' + key).once('value', s => {
+        const v = s.val(); if(!v) return;
+        let title = 'جزئیات کامل';
+        let icon = 'fa-eye';
+        let typeColor = 'var(--g)';
+        if(type==='case'){title='جزئیات پرونده درون‌ارگانی'; icon='fa-folder';}
+        else if(type==='inter'){title='جزئیات پرونده بین‌ارگانی'; icon='fa-arrows-left-right';}
+        else if(type==='report'){title='جزئیات گزارش'; icon='fa-file-lines';}
+        else if(type==='pun'){title='جزئیات پانیشمنت'; icon='fa-gavel'; typeColor='var(--r)';}
+        else if(type==='bl'){title='جزئیات بلک‌لیست'; icon='fa-ban'; typeColor='var(--r)';}
+
+        let html = `<h3 style="color:${typeColor};font-size:16px;margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid var(--bd)"><i class="fa-solid ${icon}"></i> ${title}</h3>`;
+
+        if(type==='pun' || type==='bl'){
+            html += `<div class="view-item"><span class="lbl">کاربر / شخص متخلف</span><div class="val big">${v.user||'نامشخص'}</div></div>`;
+        } else {
+            html += `<div class="view-item"><span class="lbl">عنوان</span><div class="val big">${v.title||'بدون عنوان'}</div></div>`;
+        }
+        if(v.type) html += `<div class="view-item"><span class="lbl">نوع</span><div class="val"><span class="tg tp">${v.type}</span></div></div>`;
+        if(type==='inter') html += `<div class="view-item"><span class="lbl">ارگان مقصد</span><div class="val">وزارت دادگستری</div></div>`;
+        html += `<div class="view-item"><span class="lbl">${type==='pun'?'دلیل پانیشمنت':type==='bl'?'دلیل افزودن به بلک‌لیست':'شرح کامل'}</span><div class="view-desc">${v.desc||'توضیحی ثبت نشده است'}</div></div>`;
+        html += `<div class="view-item"><span class="lbl">ثبت‌کننده</span><div class="val"><i class="fa-solid fa-user" style="color:var(--g);margin-left:5px"></i> ${v.by||'سیستم'}</div></div>`;
+        if(v.date) html += `<div class="view-item"><span class="lbl">تاریخ ثبت</span><div class="val"><i class="fa-solid fa-calendar" style="color:var(--g);margin-left:5px"></i> ${v.date}</div></div>`;
+        html += `<div class="modal-actions"><button class="btn bp" onclick="closeModal()"><i class="fa-solid fa-check"></i> بستن</button></div>`;
+        openModal(html);
+    });
+}
+
+function viewTicket(key){
+    db.ref('tickets/' + key).once('value', s => {
+        const t = s.val(); if(!t) return;
+        let html = `<h3 style="color:var(--g);font-size:16px;margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid var(--bd)"><i class="fa-solid fa-envelope-open"></i> جزئیات تیکت</h3>`;
+        html += `<div class="view-item"><span class="lbl">فرستنده</span><div class="val big"><i class="fa-solid fa-user" style="color:var(--g);margin-left:5px"></i> ${t.by}</div></div>`;
+        html += `<div class="view-item"><span class="lbl">موضوع</span><div class="val big">${t.sub||'بدون موضوع'}</div></div>`;
+        html += `<div class="view-item"><span class="lbl">متن کامل تیکت</span><div class="view-desc">${t.msg||'بدون متن'}</div></div>`;
+        if(t.reply) html += `<div class="view-item" style="border-right-color:var(--gr)"><span class="lbl" style="color:var(--gr)">پاسخ مدیریت</span><div class="view-desc">${t.reply}</div></div>`;
+        else html += `<div class="view-item" style="border-right-color:var(--r)"><span class="lbl" style="color:var(--r)">وضعیت</span><div class="val"><span class="tg td">پاسخ داده نشده</span></div></div>`;
+        html += `<div class="modal-actions"><button class="btn bp" onclick="closeModal()"><i class="fa-solid fa-check"></i> بستن</button></div>`;
+        openModal(html);
+    });
 }
 
 function saveD(p, tI, dI, sI){
@@ -631,6 +725,63 @@ function saveD(p, tI, dI, sI){
     db.ref(p).push({title, desc, type, user: title, by: cu.ic, date: new Date().toLocaleDateString('fa-IR')}).then(() => {
         alert('ثبت شد ✅');
         document.getElementById(tI).value = ''; document.getElementById(dI).value = '';
+    });
+}
+
+// 📣 ارسال اعلان جدید
+function sendAnn(){
+    const title = document.getElementById('annTitle').value.trim();
+    const msg = document.getElementById('annMsg').value.trim();
+    if(!msg){alert('⚠️ متن اعلان الزامی است'); return;}
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('fa-IR') + ' - ' + now.toLocaleTimeString('fa-IR', {hour:'2-digit', minute:'2-digit'});
+    db.ref('announcements').push({
+        title: title || null,
+        msg: msg,
+        sender: cu.ic,
+        senderRole: cu.role,
+        senderUn: cu.un,
+        date: dateStr,
+        timestamp: Date.now()
+    }).then(() => {
+        alert('✅ اعلان با موفقیت منتشر شد و برای همه کاربران آنلاین قابل مشاهده است');
+        document.getElementById('annTitle').value = '';
+        document.getElementById('annMsg').value = '';
+    });
+}
+
+// 📣 حذف اعلان
+function deleteAnn(key){
+    if(!confirm('آیا از حذف این اعلان مطمئن هستید؟ این عملیات غیرقابل بازگشت است!')) return;
+    db.ref('announcements/' + key).remove().then(() => {
+        alert('✅ اعلان حذف شد');
+    });
+}
+
+// 👤 تغییر نام کاربر توسط مدیر
+function renameUser(un){
+    db.ref('users/' + un).once('value', s => {
+        const u = s.val(); if(!u) return;
+        const html = `<h3 style="color:var(--pr);font-size:16px;margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid var(--bd)"><i class="fa-solid fa-user-pen"></i> تغییر نام کاربر</h3>
+        <div class="view-item" style="border-right-color:var(--pr);margin-bottom:20px"><span class="lbl">نام کاربری (قابل تغییر نیست)</span><div class="val">${u.un}</div></div>
+        <div class="fg"><label>اسم IC جدید</label><input id="rnIC" value="${u.ic||''}"></div>
+        <div class="fg"><label>اسم OC جدید</label><input id="rnOC" value="${u.oc||''}"></div>
+        <div class="fg"><label>رنک جدید</label><input id="rnRank" value="${u.rank||''}"></div>
+        <div class="fg"><label>ارگان</label><input id="rnOrg" value="${u.org||''}"></div>
+        <div class="modal-actions"><button class="btn bo" onclick="closeModal()">انصراف</button><button class="btn bp" onclick="saveRename('${un}')"><i class="fa-solid fa-save"></i> ذخیره تغییرات</button></div>`;
+        openModal(html);
+    });
+}
+
+function saveRename(un){
+    const newIC = document.getElementById('rnIC').value.trim();
+    const newOC = document.getElementById('rnOC').value.trim();
+    const newRank = document.getElementById('rnRank').value.trim();
+    const newOrg = document.getElementById('rnOrg').value.trim();
+    if(!newIC || !newOC){alert('اسم IC و OC الزامی هستند'); return;}
+    db.ref('users/' + un).update({ic: newIC, oc: newOC, rank: newRank, org: newOrg}).then(() => {
+        closeModal();
+        alert('✅ نام کاربر با موفقیت تغییر کرد');
     });
 }
 
@@ -677,8 +828,6 @@ function sendChat(){
     document.getElementById('chatIn').value = '';
 }
 
-// ============ قابلیت‌های GOD MODE مدیر ============
-
 function saveAppearance(){
     const data = {
         colorMain: document.getElementById('appColorMain').value,
@@ -707,7 +856,7 @@ function addItem(key, inpId){
     db.ref('settings/' + key).set(SETTINGS[key]).then(() => {
         document.getElementById(inpId).value = '';
         renderAdminLists(); updateOrgSelect();
-        alert('✅ به صورت زنده اضافه شد');
+        alert('✅ اضافه شد');
     });
 }
 
@@ -869,7 +1018,7 @@ function saveMaint(){
 }
 
 function resetAll(){
-    if(!confirm('⚠️ تمام داده‌ها پاک شود؟ غیرقابل بازگشت!')) return;
+    if(!confirm('⚠️ تمام داده‌ها پاک شود؟')) return;
     if(!confirm('⚠️ تایید نهایی؟')) return;
     db.ref('/').set(null).then(() => {alert('✅ ریست شد'); setTimeout(() => location.reload(), 500);});
 }
