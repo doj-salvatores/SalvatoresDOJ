@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="siteTitle">وزارت دادگستری | سامانه رسمی</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<style id="dynStyle">
+:root{--n:#050810;--n2:#0a0f1c;--n3:#0f1729;--g:#d4a843;--gb:#ffd27a;--ggl:rgba(212,168,67,.15);--gg2:rgba(212,168,67,.08);--tx:#e8edf5;--txm:#7d8ba3;--bd:rgba(255,255,255,.06);--r:#e74c5a;--gr:#34c77b;--or:#f59e0b;--bl:#3b82f6;--pr:#a855f7}
+</style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',sans-serif;text-decoration:none;list-style:none}
+body{background:var(--n);color:var(--tx);min-height:100vh;overflow-x:hidden;transition:background .3s}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(circle at 20% 50%,rgba(212,168,67,.03) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(59,130,246,.03) 0%,transparent 50%);pointer-events:none;z-index:-1}
+
+.v{display:none;animation:fi .4s ease}.v.a{display:block}
+.t{display:none;animation:fi .3s ease}.t.a{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(212,168,67,.2)}50%{box-shadow:0 0 40px rgba(212,168,67,.4)}}
+@keyframes pulse2{0%,100%{opacity:1}50%{opacity:.4}}
+
+.btn{padding:11px 22px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:8px;transition:all .3s}
+.bp{background:linear-gradient(135deg,var(--g),#c4942f);color:#000;font-weight:800}.bp:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(212,168,67,.4)}
+.bo{background:transparent;color:var(--tx);border:1.5px solid rgba(255,255,255,.2)}.bo:hover{background:rgba(255,255,255,.05);border-color:var(--g)}
+.bd{background:linear-gradient(135deg,#e74c5a,#c0392b);color:#fff;padding:7px 14px;font-size:12px;border-radius:8px}.bd:hover{box-shadow:0 4px 15px rgba(231,76,90,.4)}
+.bs{background:linear-gradient(135deg,#34c77b,#27ae60);color:#fff;padding:7px 14px;font-size:12px;border-radius:8px}
+.ba{background:rgba(255,255,255,.05);color:var(--tx);border:1px solid var(--bd);padding:7px 14px;font-size:12px;border-radius:8px}.ba:hover{background:var(--g);color:#000;border-color:var(--g)}
+.bedit{background:linear-gradient(135deg,var(--bl),#2563eb);color:#fff;padding:6px 12px;font-size:11px;border-radius:6px;border:none;cursor:pointer;font-weight:700}
+.bf{width:100%;justify-content:center;padding:14px;font-size:15px}
+
+.tg{padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;display:inline-block}
+.ts{background:rgba(52,199,123,.15);color:var(--gr)}.td{background:rgba(231,76,90,.15);color:var(--r)}.ti{background:rgba(59,130,246,.15);color:var(--bl)}.tp{background:rgba(212,168,67,.15);color:var(--g)}
+
+.top-bar{background:rgba(0,0,0,.5);backdrop-filter:blur(20px);color:var(--txm);padding:8px 5%;font-size:11px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bd)}
+.top-bar i{color:var(--g)}
+
+header{background:linear-gradient(180deg,rgba(15,23,41,.95),rgba(8,15,30,.98));color:#fff;padding:22px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(212,168,67,.3)}
+.hl{display:flex;align-items:center;gap:18px}
+.seal-wrap{animation:float 4s ease-in-out infinite}
+.sl{width:62px;height:62px;background:linear-gradient(135deg,var(--g),#c4942f);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#000;font-size:26px;border:3px solid rgba(255,255,255,.3);box-shadow:0 0 30px rgba(212,168,67,.3)}
+.ht h1{font-size:22px;font-weight:900;background:linear-gradient(90deg,#fff,var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ht p{font-size:11px;color:var(--g);letter-spacing:2px;font-weight:600}
+
+.nr{display:flex;gap:10px}
+
+.hero{position:relative;padding:120px 5% 100px;text-align:center;overflow:hidden}
+.hero-badge{background:var(--ggl);color:var(--g);border:1px solid rgba(212,168,67,.3);padding:8px 24px;border-radius:50px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:8px;margin-bottom:30px}
+.hero-badge .dot{width:6px;height:6px;background:var(--g);border-radius:50%;animation:pulse2 2s infinite}
+.hero h2{font-size:52px;font-weight:900;margin-bottom:22px;max-width:900px;margin:0 auto 22px}
+.hero h2 span{background:linear-gradient(90deg,var(--g),var(--gb));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:17px;color:var(--txm);max-width:650px;margin:0 auto 45px;line-height:1.9}
+
+.stats-section{background:rgba(15,23,41,.6);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:55px 5%;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:30px;text-align:center}
+.stat-item h2{font-size:40px;font-weight:900;background:linear-gradient(135deg,var(--g),var(--gb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.stat-item p{font-size:12px;color:var(--txm);letter-spacing:1px}
+
+.roles-section{padding:80px 5% 60px}
+.section-header{text-align:center;margin-bottom:50px}
+.section-header h3{font-size:32px;font-weight:900;background:linear-gradient(90deg,#fff,var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.section-header p{color:var(--txm);font-size:14px}
+.roles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;max-width:1400px;margin:0 auto}
+.role-card{background:rgba(22,32,56,.6);border:1px solid var(--bd);border-radius:16px;padding:35px 25px;text-align:center;cursor:pointer;transition:all .4s}
+.role-card:hover{transform:translateY(-8px);border-color:rgba(212,168,67,.3)}
+.role-card .r-icon{width:70px;height:70px;background:rgba(212,168,67,.15);border:1px solid rgba(212,168,67,.2);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;color:var(--g)}
+.role-card h4{font-size:16px;margin-bottom:10px}.role-card p{font-size:12px;color:var(--txm)}
+
+.auth-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:30px 20px}
+.auth-box{background:rgba(22,32,56,.5);backdrop-filter:blur(30px);padding:40px;border-radius:20px;width:100%;max-width:500px;border:1px solid var(--bd);box-shadow:0 25px 80px rgba(0,0,0,.5)}
+.auth-header{text-align:center;margin-bottom:30px}
+.auth-header .sl{margin:0 auto 15px;animation:glow 3s infinite}
+.auth-header h2{font-size:22px;font-weight:900}
+
+.fg{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.fg label{font-size:11px;color:var(--g);font-weight:700}
+.fg input,.fg select,.fg textarea{background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:12px 16px;border-radius:12px;color:var(--tx);font-size:13px;outline:none;width:100%;font-family:'Vazirmatn'}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(212,168,67,.1)}
+.fg select option{background:var(--n2);color:var(--tx)}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg input[type="color"]{height:45px;padding:4px;cursor:pointer}
+
+.em{background:rgba(231,76,90,.1);color:var(--r);padding:12px;border-radius:10px;margin-bottom:14px;font-size:12px;display:none;border:1px solid rgba(231,76,90,.2)}
+.sm2{background:rgba(52,199,123,.1);color:var(--gr);padding:12px;border-radius:10px;margin-bottom:14px;font-size:12px;display:none;border:1px solid rgba(52,199,123,.2)}
+
+.pc{display:flex;min-height:100vh}
+.sb{width:280px;background:rgba(15,23,41,.95);color:#fff;display:flex;flex-direction:column;padding:22px 0;position:sticky;top:0;height:100vh;overflow-y:auto;border-left:1px solid var(--bd)}
+.sh{padding:0 20px 20px;border-bottom:1px solid var(--bd);margin-bottom:15px;text-align:center}
+.ss{width:52px;height:52px;background:linear-gradient(135deg,var(--g),#c4942f);border-radius:14px;display:flex;align-items:center;justify-content:center;color:#000;font-size:22px;margin:0 auto 10px}
+.sh h3{font-size:14px;font-weight:800}.sh p{font-size:10px;color:var(--g);margin-top:3px}
+
+.ub{padding:12px 20px;background:var(--ggl);border-right:3px solid var(--g);margin:0 15px 15px 0;border-radius:0 10px 10px 0}
+.ub .nm{font-size:13px;font-weight:800}.ub .rl{font-size:10px;color:var(--g);margin-top:3px}
+
+.sm{display:flex;flex-direction:column;flex:1;padding:0 10px;overflow-y:auto}
+.sm::-webkit-scrollbar{width:4px}.sm::-webkit-scrollbar-thumb{background:rgba(212,168,67,.3);border-radius:2px}
+.sm a{display:flex;align-items:center;gap:11px;padding:11px 14px;color:var(--txm);border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;margin-bottom:3px;transition:.3s}
+.sm a:hover{background:rgba(255,255,255,.04);color:#fff}
+.sm a.a{background:var(--ggl);color:var(--g);border:1px solid rgba(212,168,67,.15)}
+.sm a i{width:18px;text-align:center}
+.sm .god-section{border-top:1px solid var(--bd);margin-top:12px;padding-top:12px}
+.sm .god-section a{color:#ff7a7a}
+.sm .god-section a:hover{color:#fff;background:rgba(255,122,122,.1)}
+
+.lo{margin:15px 18px 0;padding:12px;background:linear-gradient(135deg,var(--r),#c0392b);color:#fff;border:none;border-radius:10px;cursor:pointer;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;gap:8px}
+
+.pm{flex:1;padding:28px 38px;background:rgba(8,15,30,.5)}
+.ph{display:flex;justify-content:space-between;align-items:center;padding-bottom:18px;margin-bottom:24px;border-bottom:1px solid var(--bd)}
+.ph h2{font-size:22px;font-weight:900;background:linear-gradient(90deg,#fff,var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:24px}
+.sc{background:rgba(22,32,56,.5);border:1px solid var(--bd);padding:22px;border-radius:14px;display:flex;justify-content:space-between;align-items:center}
+.sc .i h3{font-size:24px;font-weight:900;color:var(--g);margin-bottom:4px}.sc .i p{font-size:10px;color:var(--txm)}
+.sc .ic{color:rgba(212,168,67,.2);font-size:28px}
+
+.pk{background:rgba(22,32,56,.4);border:1px solid var(--bd);border-radius:14px;padding:22px;margin-bottom:18px}
+.pk h3{font-size:14px;color:var(--tx);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;font-weight:700}
+.pk h3 i{color:var(--g)}
+.pk.danger{border:1px solid rgba(231,76,90,.3);background:rgba(231,76,90,.05)}
+.pk.danger h3 i{color:var(--r)}
+
+table{width:100%;border-collapse:collapse}
+thead{background:rgba(212,168,67,.08)}
+th{padding:12px 14px;text-align:right;font-size:10px;font-weight:700;color:var(--g);border-bottom:1px solid var(--bd)}
+td{padding:12px 14px;border-bottom:1px solid var(--bd);font-size:12px;color:var(--txm)}
+
+.chat-wrap{display:flex;flex-direction:column;height:70vh;min-height:500px;background:rgba(22,32,56,.3);border:1px solid var(--bd);border-radius:16px;overflow:hidden}
+.chat-head{background:rgba(15,23,41,.8);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bd)}
+.chat-head h4{font-size:14px;font-weight:700;display:flex;align-items:center;gap:10px;color:var(--tx)}
+.chat-head .live-dot{width:8px;height:8px;background:var(--gr);border-radius:50%;animation:pulse2 1.5s infinite}
+.chat-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px}
+.msg{display:flex;flex-direction:column;max-width:72%}
+.msg.mine{align-self:flex-start}.msg.other{align-self:flex-end}
+.msg .bub{padding:10px 16px;border-radius:16px;font-size:13px;line-height:1.7}
+.msg.mine .bub{background:rgba(255,255,255,.05);border:1px solid var(--bd)}
+.msg.other .bub{background:rgba(212,168,67,.15);border:1px solid rgba(212,168,67,.2)}
+.chat-foot{background:rgba(15,23,41,.6);border-top:1px solid var(--bd);padding:14px 18px;display:flex;gap:12px}
+.chat-foot input{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:12px 18px;border-radius:25px;outline:none;font-size:13px;color:var(--tx)}
+.chat-foot button{background:linear-gradient(135deg,var(--g),#c4942f);color:#000;border:none;padding:12px 22px;border-radius:25px;cursor:pointer;font-weight:800;font-size:13px}
+
+.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);z-index:999;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.a{display:flex}
+.modal-box{background:rgba(15,23,41,.98);border:1px solid rgba(212,168,67,.3);border-radius:20px;padding:30px;width:100%;max-width:600px;max-height:85vh;overflow-y:auto}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:15px;border-top:1px solid var(--bd)}
+
+.tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.tag-chip{background:var(--ggl);color:var(--g);border:1px solid rgba(212,168,67,.3);padding:7px 14px;border-radius:20px;font-size:12px;display:inline-flex;align-items:center;gap:8px}
+.tag-chip button{background:var(--r);color:#fff;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;font-size:10px;padding:0;display:flex;align-items:center;justify-content:center}
+
+.perm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:10px}
+.perm-item{background:rgba(255,255,255,.03);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.perm-item input{width:16px;height:16px;cursor:pointer;accent-color:var(--g)}
+.perm-item label{font-size:12px;color:var(--tx);cursor:pointer;flex:1}
+
+.sw{position:relative;display:inline-block;width:46px;height:24px}
+.sw input{opacity:0;width:0;height:0}
+.sl2{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#333;transition:.3s;border-radius:24px}
+.sl2:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background:#fff;transition:.3s;border-radius:50%}
+input:checked+.sl2{background:var(--g)}
+input:checked+.sl2:before{transform:translateX(22px)}
+
+footer{background:rgba(8,15,30,.9);color:var(--txm);padding:30px 5%;text-align:center;border-top:1px solid var(--bd);font-size:11px}
+.footer-maker{color:var(--g);font-weight:800;margin-top:8px;display:block}
+</style>
+</head>
+<body>
+
+<!-- صفحه اصلی -->
+<div id="landing" class="v a">
+<div class="top-bar"><div><i class="fa-solid fa-scale-balanced"></i> سامانه رسمی وزارت دادگستری</div><div><i class="fa-solid fa-globe"></i> متصل به دیتابیس ابری زنده 🟢</div></div>
+<header>
+<div class="hl"><div class="seal-wrap"><div class="sl" id="headerSealIcon"><i class="fa-solid fa-scale-balanced"></i></div></div><div class="ht"><h1 id="siteName">DEPARTMENT OF JUSTICE</h1><p id="siteSlogan">عدالت • صداقت • تعالی</p></div></div>
+<div class="nr"><button class="btn bo" onclick="sv('loginV')"><i class="fa-solid fa-right-to-bracket"></i> ورود</button><button class="btn bp" onclick="sv('regV')"><i class="fa-solid fa-user-plus"></i> ثبت‌نام</button></div>
+</header>
+<section class="hero">
+<div class="hero-badge"><span class="dot"></span> <span id="heroBadgeText">سامانه فعال • Elite Edition</span></div>
+<h2 id="heroTitle">سامانه جامع <span>وزارت دادگستری</span></h2>
+<p id="heroDesc">اجرای قانون، حمایت از حقوق شهروندان و تضمین عدالت برابر.</p>
+<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap"><button class="btn bp" onclick="sv('regV')">ثبت‌نام در سامانه</button><button class="btn bo" onclick="sv('loginV')">ورود به پنل</button></div>
+</section>
+<section class="stats-section" id="statsSection">
+<div class="stat-item"><h2 id="stat1n">۶</h2><p id="stat1l">سطح دسترسی</p></div>
+<div class="stat-item"><h2 id="liveUserStat">۰</h2><p>کاربر آنلاین</p></div>
+<div class="stat-item"><h2 id="stat3n">2026</h2><p id="stat3l">نسخه الیت</p></div>
+</section>
+<footer>
+<div id="footerText">© 2026 وزارت دادگستری | سامانه رسمی و محرمانه</div>
+<span class="footer-maker" id="footerDevText"><i class="fa-solid fa-code"></i> تهیه و توسعه توسط ویکتور فرانکشتاین 💀</span>
+</footer>
+</div>
+
+<!-- ثبت‌نام -->
+<div id="regV" class="v"><div class="auth-page"><div class="auth-box">
+<div class="auth-header"><div class="sl" style="margin:0 auto 15px"><i class="fa-solid fa-scale-balanced"></i></div><h2>ثبت‌نام در سامانه</h2></div>
+<div id="rErr" class="em"></div><div id="rSuc" class="sm2"></div>
+<div class="fg2"><div class="fg"><label>اسم IC</label><input id="rIC"></div><div class="fg"><label>اسم OC</label><input id="rOC"></div></div>
+<div class="fg2"><div class="fg"><label>ارگان</label><select id="rOrg" onchange="checkC()"></select></div><div class="fg"><label>رنک</label><input id="rRank"></div></div>
+<div class="fg2"><div class="fg"><label>نام کاربری</label><input id="rUn"></div><div class="fg"><label>رمز عبور</label><input id="rPw" type="password"></div></div>
+<div id="cHint" style="display:none" class="sm2"><i class="fa-solid fa-circle-check"></i> شهروندان بلافاصله فعال می‌شوند.</div>
+<button class="btn bp bf" onclick="doReg()">ثبت‌نام آنلاین</button>
+<div style="text-align:center;margin-top:16px;font-size:12px"><a onclick="sv('loginV')" style="color:var(--g);cursor:pointer">ورود به حساب</a></div>
+</div></div></div>
+
+<!-- ورود -->
+<div id="loginV" class="v"><div class="auth-page"><div class="auth-box">
+<div class="auth-header"><div class="sl" style="margin:0 auto 15px"><i class="fa-solid fa-scale-balanced"></i></div><h2>ورود به سامانه</h2></div>
+<div id="lErr" class="em"></div>
+<div class="fg"><label>نام کاربری</label><input id="lUn"></div>
+<div class="fg"><label>رمز عبور</label><input id="lPw" type="password"></div>
+<button class="btn bp bf" onclick="doLog()">ورود امن</button>
+<div style="text-align:center;margin-top:16px;font-size:12px"><a onclick="sv('regV')" style="color:var(--g);cursor:pointer">ثبت‌نام</a></div>
+</div></div></div>
+
+<!-- انتظار -->
+<div id="waitV" class="v"><div class="auth-page"><div class="auth-box" style="text-align:center"><h2>در انتظار تایید مدیریت</h2><p style="color:var(--txm);font-size:13px;margin:15px 0">ثبت‌نام شما ثبت شد. منتظر تایید باشید.</p><button class="btn bo" onclick="sv('loginV')">بازگشت</button></div></div></div>
+
+<!-- حالت تعمیرات -->
+<div id="maintV" class="v"><div class="auth-page"><div class="auth-box" style="text-align:center"><div class="sl" style="margin:0 auto 15px;background:linear-gradient(135deg,var(--or),#e67e22)"><i class="fa-solid fa-wrench"></i></div><h2>سامانه در حال تعمیرات</h2><p style="color:var(--txm);font-size:13px;margin:15px 0">سایت موقتاً در دسترس نیست.</p><button class="btn bo" onclick="sv('loginV')">ورود مدیر</button></div></div></div>
+
+<!-- پنل اصلی -->
+<div id="P_main" class="v">
+<div class="pc"><aside class="sb">
+<div class="sh"><div class="ss" id="pIcon"></div><h3 id="pRoleName">پنل</h3><p>DOJ SYSTEM</p></div>
+<div class="ub"><div class="nm" id="pName">کاربر</div><div class="rl" id="pRank">رنک</div></div>
+<div class="sm" id="pMenu"></div>
+<button class="lo" onclick="logout()">خروج</button>
+</aside>
+<main class="pm"><div class="ph"><h2 id="pTitle">داشبورد</h2><span class="tg ts">Live DB 🟢</span></div><div id="pContent"></div></main></div></div>
+
+<div id="modal" class="modal"><div class="modal-box" id="modalBox"></div></div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCLZGS5XYKcwg0qbZqJQv2qQtWkcohN4Kc",
+  authDomain: "doj-system-ae152.firebaseapp.com",
+  databaseURL: "https://doj-system-ae152-default-rtdb.firebaseio.com",
+  projectId: "doj-system-ae152",
+  storageBucket: "doj-system-ae152.firebasestorage.app",
+  messagingSenderId: "810744306620",
+  appId: "1:810744306620:web:cfa47958a080a2de74a9b9",
+  measurementId: "G-22LF3Y1ZFB"
+};
+
+if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+const db = firebase.database();
+let cu = null;
+let SETTINGS = null;
+
+const DEFAULT_ROLES = {
+    admin: {name:'مدیر سایت', icon:'fa-user-tie', perms:['all']},
+    attorney: {name:'دادستان کل', icon:'fa-gavel', perms:['pending','users_manage','cases','cases_edit','inter','inter_edit','reports','reports_edit','pun','blacklist','members','tickets_view','chat','ann_send']},
+    command: {name:'کامند تیم', icon:'fa-star', perms:['cases','cases_edit','inter','inter_edit','reports','reports_edit','pun','blacklist','members','tickets_view','chat','ann_view']},
+    staff: {name:'کارمند وزارت', icon:'fa-briefcase', perms:['cases','cases_edit','inter','inter_edit','reports','reports_edit','pun_view','blacklist','tickets_send','activity','chat','ann_view']},
+    military: {name:'نیروی نظامی', icon:'fa-shield', perms:['inter','blacklist','tickets_send']},
+    citizen: {name:'شهروند', icon:'fa-user', perms:['tickets_send']}
+};
+
+const ALL_PERMS = {
+    pending:'تایید کاربران جدید', users_manage:'تغییر رول کاربران',
+    cases:'پرونده درون‌ارگانی', cases_edit:'ویرایش پرونده درون‌ارگانی',
+    inter:'پرونده بین‌ارگانی', inter_edit:'ویرایش پرونده بین‌ارگانی',
+    reports:'گزارش‌ها', reports_edit:'ویرایش گزارش‌ها',
+    pun:'صدور پانیشمنت', pun_view:'فقط مشاهده پانیشمنت',
+    blacklist:'بلک‌لیست (ثبت و مشاهده)', members:'مشاهده اعضا',
+    tickets_view:'مشاهده و پاسخ تیکت', tickets_send:'ارسال تیکت',
+    activity:'ثبت اکتیویتی', chat:'چت زنده',
+    ann_send:'ارسال اعلان', ann_view:'مشاهده اعلان'
+};
+
+const DEFAULT_SETTINGS = {
+    roles: DEFAULT_ROLES,
+    reportTypes: ['گزارش دادگاه','راب استتوس','اوپریشن ریپورت','جرایم سایبری','سوپروایزر','اینترویو','ترین','استعفا'],
+    punTypes: ['اخطار','تذکر رسمی','تعلیق موقت','تعلیق دائم','کسر درجه','اخراج'],
+    blTypes: ['کلاهبرداری','جرم سایبری','تخلف اداری','خیانت در امانت','جرائم مسلحانه','قاچاق','سایر'],
+    orgs: ['وزارت دادگستری (DOJ)','نیروهای نظامی','شهروند عادی','سایر'],
+    customTabs: {},
+    appearance: {
+        colorMain:'#d4a843', colorBg:'#050810',
+        siteName:'DEPARTMENT OF JUSTICE', slogan:'عدالت • صداقت • تعالی',
+        sealIcon:'fa-scale-balanced', badgeText:'سامانه فعال • Elite Edition',
+        heroTitle:'سامانه جامع <span>وزارت دادگستری</span>',
+        heroDesc:'اجرای قانون، حمایت از حقوق شهروندان و تضمین عدالت برابر.',
+        footerText:'© 2026 وزارت دادگستری | سامانه رسمی و محرمانه',
+        devText:'تهیه و توسعه توسط ویکتور فرانکشتاین 💀'
+    },
+    maintenance: false,
+    stats: [{n:'۶',l:'سطح دسترسی'},{n:'۰',l:'کاربر آنلاین'},{n:'2026',l:'نسخه الیت'}]
+};
+
+function sv(id){document.querySelectorAll('.v').forEach(v=>v.classList.remove('a'));document.getElementById(id).classList.add('a')}
+function checkC(){document.getElementById('cHint').style.display=(document.getElementById('rOrg').value==='citizen')?'block':'none'}
+
+function loadSettings(cb){
+    db.ref('settings').once('value', s => {
+        SETTINGS = s.val() || DEFAULT_SETTINGS;
+        Object.keys(DEFAULT_SETTINGS).forEach(k => { if(!SETTINGS[k]) SETTINGS[k] = DEFAULT_SETTINGS[k]; });
+        if(!SETTINGS.customTabs) SETTINGS.customTabs = {};
+        updateOrgSelect();
+        applyAppearance();
+        if(cb) cb();
+    });
+}
+
+function updateOrgSelect(){
+    const sel = document.getElementById('rOrg'); if(!sel) return;
+    let html = '';
+    SETTINGS.orgs.forEach(o => { if(o === 'شهروند عادی') html += `<option value="citizen">${o}</option>`; else html += `<option>${o}</option>`; });
+    sel.innerHTML = html;
+}
+
+function applyAppearance(){
+    const a = SETTINGS.appearance || DEFAULT_SETTINGS.appearance;
+    const main = a.colorMain || '#d4a843', bg = a.colorBg || '#050810';
+    const r=parseInt(main.substr(1,2),16),g=parseInt(main.substr(3,2),16),b=parseInt(main.substr(5,2),16);
+    document.getElementById('dynStyle').innerHTML = `:root{--n:${bg};--n2:${bg};--n3:${bg};--g:${main};--gb:${main};--ggl:rgba(${r},${g},${b},.15);--gg2:rgba(${r},${g},${b},.08);--tx:#e8edf5;--txm:#7d8ba3;--bd:rgba(255,255,255,.06);--r:#e74c5a;--gr:#34c77b;--or:#f59e0b;--bl:#3b82f6;--pr:#a855f7}`;
+    if(document.getElementById('siteName')) document.getElementById('siteName').innerText = a.siteName;
+    if(document.getElementById('siteSlogan')) document.getElementById('siteSlogan').innerText = a.slogan;
+    if(document.getElementById('headerSealIcon')) document.getElementById('headerSealIcon').innerHTML = `<i class="fa-solid ${a.sealIcon}"></i>`;
+    if(document.getElementById('heroBadgeText')) document.getElementById('heroBadgeText').innerText = a.badgeText;
+    if(document.getElementById('heroTitle')) document.getElementById('heroTitle').innerHTML = a.heroTitle;
+    if(document.getElementById('heroDesc')) document.getElementById('heroDesc').innerText = a.heroDesc;
+    if(document.getElementById('footerText')) document.getElementById('footerText').innerText = a.footerText;
+    if(document.getElementById('footerDevText')) document.getElementById('footerDevText').innerHTML = `<i class="fa-solid fa-code"></i> ${a.devText}`;
+    if(SETTINGS.stats){
+        if(document.getElementById('stat1n')) document.getElementById('stat1n').innerText = SETTINGS.stats[0].n;
+        if(document.getElementById('stat1l')) document.getElementById('stat1l').innerText = SETTINGS.stats[0].l;
+        if(document.getElementById('stat3n')) document.getElementById('stat3n').innerText = SETTINGS.stats[2].n;
+        if(document.getElementById('stat3l')) document.getElementById('stat3l').innerText = SETTINGS.stats[2].l;
+    }
+}
+
+function doReg(){
+    const ic=document.getElementById('rIC').value.trim();
+    const oc=document.getElementById('rOC').value.trim();
+    const org=document.getElementById('rOrg').value;
+    const rank=document.getElementById('rRank').value.trim();
+    let un=document.getElementById('rUn').value.trim().toLowerCase();
+    const pw=document.getElementById('rPw').value.trim();
+    const e=document.getElementById('rErr'), s2=document.getElementById('rSuc');
+    e.style.display='none'; s2.style.display='none';
+    if(!ic||!oc||!org||!rank||!un||!pw){e.innerText='⚠️ تمام فیلدها الزامی'; e.style.display='block'; return;}
+    const cleanUn = un.replace(/[\.\#\$\[\]]/g, "_");
+    const isC = (org === 'citizen' || org === 'شهروند عادی');
+    db.ref('users/' + cleanUn).once('value', snap => {
+        if(snap.exists()){e.innerText='⚠️ نام کاربری تکراری'; e.style.display='block';}
+        else {
+            db.ref('users/' + cleanUn).set({ic, oc, org, rank, un: cleanUn, pw, role: isC?'citizen':'pending', approved: isC}).then(() => {
+                if(isC){s2.innerText='✅ ورود...'; s2.style.display='block'; cu={ic,oc,org,rank,un:cleanUn,pw,role:'citizen',approved:true}; setTimeout(()=>openPanel(), 1000);}
+                else {s2.innerText='✅ منتظر تایید باشید'; s2.style.display='block'; setTimeout(()=>sv('waitV'), 1200);}
+            }).catch(err => {e.innerText='❌ '+err.message; e.style.display='block';});
+        }
+    });
+}
+
+function doLog(){
+    const un=document.getElementById('lUn').value.trim().toLowerCase(), pw=document.getElementById('lPw').value.trim(), e=document.getElementById('lErr');
+    e.style.display='none';
+    if(!un||!pw){e.innerText='⚠️ فیلدها را پر کنید'; e.style.display='block'; return;}
+    const cleanUn = un.replace(/[\.\#\$\[\]]/g, "_");
+
+    if((cleanUn==='parsa_2043' || cleanUn==='parsa.2043') && (pw==='Parsa.2043' || pw==='parsa.2043')){
+        cu = {ic:'مدیر کل سامانه', oc:'Parsa', org:'مدیریت', rank:'مدیر کل', un:'parsa_2043', role:'admin', approved:true};
+        openPanel(); return;
+    }
+
+    db.ref('users/' + cleanUn).once('value', snap => {
+        const u = snap.val();
+        if(u && u.pw === pw){
+            if(SETTINGS && SETTINGS.maintenance && u.role !== 'admin'){sv('maintV'); return;}
+            if(!u.approved) sv('waitV');
+            else {cu = u; openPanel();}
+        } else {e.innerText='❌ نام کاربری یا رمز اشتباه'; e.style.display='block';}
+    });
+}
+
+function openPanel(){
+    sv('P_main');
+    loadSettings(() => { buildUI(); listenLive(); });
+}
+
+function buildUI(){
+    const r = cu.role;
+    const roleInfo = SETTINGS.roles[r] || {name:r, icon:'fa-user', perms:[]};
+    const perms = roleInfo.perms || [];
+    const isAdmin = r === 'admin';
+    const has = p => isAdmin || perms.includes('all') || perms.includes(p);
+
+    document.getElementById('pName').innerText = cu.ic;
+    document.getElementById('pRank').innerText = cu.rank;
+    document.getElementById('pRoleName').innerText = roleInfo.name;
+    document.getElementById('pIcon').innerHTML = `<i class="fa-solid ${roleInfo.icon}"></i>`;
+
+    let m = `<a class="a" onclick="shT(event,'dash')"><i class="fa-solid fa-gauge"></i> داشبورد</a>`;
+    let c = `<div id="dash" class="t a"><div class="pk"><h3><i class="fa-solid fa-circle-info"></i> خوش آمدید ${cu.ic}</h3><p style="color:var(--gr)">🟢 متصل به دیتابیس ابری Firebase</p></div></div>`;
+
+    if(has('pending')){
+        m += `<a onclick="shT(event,'pend')"><i class="fa-solid fa-user-clock"></i> تایید کاربران</a>`;
+        c += `<div id="pend" class="t"><div class="pk"><h3>درخواست‌های در انتظار</h3><table><thead><tr><th>IC</th><th>OC</th><th>ارگان</th><th>رنک</th><th>نقش</th><th>عمل</th></tr></thead><tbody id="pendTbl"></tbody></table></div></div>`;
+    }
+
+    if(has('users_manage') || isAdmin){
+        m += `<a onclick="shT(event,'allUsers')"><i class="fa-solid fa-users"></i> مدیریت کاربران</a>`;
+        c += `<div id="allUsers" class="t"><div class="pk"><h3>تمام کاربران</h3><table><thead><tr><th>IC</th><th>OC</th><th>ارگان</th><th>رنک</th><th>نقش</th><th>عمل</th></tr></thead><tbody id="allUsersTbl"></tbody></table></div></div>`;
+    }
+
+    if(has('cases')){
+        m += `<a onclick="shT(event,'cases')"><i class="fa-solid fa-folder"></i> پرونده درون‌ارگانی</a>`;
+        c += `<div id="cases" class="t"><div class="pk"><h3>ثبت پرونده</h3><div class="fg"><label>عنوان</label><input id="inCsT"></div><div class="fg"><label>شرح</label><textarea id="inCsD" rows="4"></textarea></div><button class="btn bp" onclick="saveD('cases','inCsT','inCsD')">ثبت</button></div><div class="pk"><h3>لیست</h3><table><thead><tr><th>#</th><th>عنوان</th><th>توسط</th><th>تاریخ</th><th>عمل</th></tr></thead><tbody id="casesTbl"></tbody></table></div></div>`;
+    }
+
+    if(has('inter')){
+        m += `<a onclick="shT(event,'inter')"><i class="fa-solid fa-arrows-left-right"></i> پرونده بین‌ارگانی</a>`;
+        c += `<div id="inter" class="t"><div class="pk"><h3>ارسال به وزارت دادگستری</h3><div class="fg"><label>عنوان</label><input id="inInT"></div><div class="fg"><label>ارگان مقصد</label><input value="وزارت دادگستری" disabled style="background:rgba(212,168,67,.1);color:var(--g)"></div><div class="fg"><label>شرح</label><textarea id="inInD" rows="4"></textarea></div><button class="btn bp" onclick="saveD('inter','inInT','inInD')">ارسال</button></div><div class="pk"><h3>لیست</h3><table><thead><tr><th>#</th><th>عنوان</th><th>توسط</th><th>تاریخ</th><th>عمل</th></tr></thead><tbody id="interTbl"></tbody></table></div></div>`;
+    }
+
+    if(has('reports')){
+        const typesOpt = SETTINGS.reportTypes.map(x=>`<option>${x}</option>`).join('');
+        m += `<a onclick="shT(event,'reports')"><i class="fa-solid fa-file-lines"></i> گزارش‌ها</a>`;
+        c += `<div id="reports" class="t"><div class="pk"><h3>ثبت گزارش</h3><div class="fg2"><div class="fg"><label>نوع</label><select id="inRpS">${typesOpt}</select></div><div class="fg"><label>عنوان</label><input id="inRpT"></div></div><div class="fg"><label>شرح</label><textarea id="inRpD" rows="4"></textarea></div><button class="btn bp" onclick="saveD('reports','inRpT','inRpD','inRpS')">ثبت</button></div><div class="pk"><h3>لیست گزارش‌ها</h3><table><thead><tr><th>#</th><th>نوع</th><th>عنوان</th><th>توسط</th><th>عمل</th></tr></thead><tbody id="reportsTbl"></tbody></table></div></div>`;
+    }
+
+    if(has('pun') || has('pun_view')){
+        const typesOpt = SETTINGS.punTypes.map(x=>`<option>${x}</option>`).join('');
+        m += `<a onclick="shT(event,'pun')"><i class="fa-solid fa-gavel"></i> پانیشمنت</a>`;
+        let pHtml = '';
+        if(has('pun')) pHtml += `<div class="pk"><h3>صدور پانیشمنت</h3><div class="fg2"><div class="fg"><label>کاربر</label><input id="inPunU"></div><div class="fg"><label>نوع</label><select id="inPunS">${typesOpt}</select></div></div><div class="fg"><label>دلیل</label><textarea id="inPunD" rows="3"></textarea></div><button class="btn bd" onclick="saveD('punishments','inPunU','inPunD','inPunS')">صدور</button></div>`;
+        pHtml += `<div class="pk"><h3>لیست پانیشمنت‌ها${has('pun_view')?' (فقط مشاهده)':''}</h3><table><thead><tr><th>#</th><th>کاربر</th><th>نوع</th><th>دلیل</th><th>توسط</th></tr></thead><tbody id="punTbl"></tbody></table></div>`;
+        c += `<div id="pun" class="t">${pHtml}</div>`;
+    }
+
+    if(has('blacklist')){
+        const typesOpt = SETTINGS.blTypes.map(x=>`<option>${x}</option>`).join('');
+        m += `<a onclick="shT(event,'bl')"><i class="fa-solid fa-ban"></i> بلک‌لیست</a>`;
+        c += `<div id="bl" class="t"><div class="pk"><h3>افزودن به بلک‌لیست</h3><div class="fg2"><div class="fg"><label>شخص</label><input id="inBlU"></div><div class="fg"><label>نوع جرم</label><select id="inBlS">${typesOpt}</select></div></div><div class="fg"><label>دلیل</label><textarea id="inBlD" rows="3"></textarea></div><button class="btn bd" onclick="saveD('blacklist','inBlU','inBlD','inBlS')">ثبت</button></div><div class="pk"><h3>لیست سیاه</h3><table><thead><tr><th>#</th><th>شخص</th><th>نوع</th><th>دلیل</th><th>توسط</th></tr></thead><tbody id="blTbl"></tbody></table></div></div>`;
+    }
+
+    if(has('tickets_view')){
+        m += `<a onclick="shT(event,'tickets')"><i class="fa-solid fa-envelope"></i> تیکت‌ها</a>`;
+        c += `<div id="tickets" class="t"><div class="pk"><h3>تیکت‌های دریافتی</h3><table><thead><tr><th>فرستنده</th><th>موضوع</th><th>متن</th><th>پاسخ</th><th>عمل</th></tr></thead><tbody id="ticketsTbl"></tbody></table></div></div>`;
+    }
+    if(has('tickets_send') && !has('tickets_view')){
+        m += `<a onclick="shT(event,'sendTicket')"><i class="fa-solid fa-envelope"></i> ارسال تیکت</a>`;
+        c += `<div id="sendTicket" class="t"><div class="pk"><h3>ارسال تیکت</h3><div class="fg"><label>موضوع</label><input id="tkSub"></div><div class="fg"><label>متن</label><textarea id="tkMsg" rows="5"></textarea></div><button class="btn bp" onclick="sendTk()">ارسال</button></div></div>`;
+    }
+
+    if(has('chat')){
+        m += `<a onclick="shT(event,'chat');startChat()"><i class="fa-solid fa-comments"></i> چت زنده</a>`;
+        c += `<div id="chat" class="t"><div class="chat-wrap"><div class="chat-head"><h4><span class="live-dot"></span> چت درون‌ارگانی</h4></div><div class="chat-body" id="chatBody"></div><div class="chat-foot"><input id="chatIn" onkeypress="if(event.key==='Enter')sendChat()"><button onclick="sendChat()">ارسال</button></div></div></div>`;
+    }
+
+    // تب‌های سفارشی مدیر
+    if(SETTINGS.customTabs){
+        Object.keys(SETTINGS.customTabs).forEach(tid => {
+            const tab = SETTINGS.customTabs[tid];
+            if(tab.roles && (tab.roles.includes(r) || isAdmin)){
+                m += `<a onclick="shT(event,'ct_${tid}')"><i class="fa-solid ${tab.icon||'fa-plus'}"></i> ${tab.name}</a>`;
+                c += `<div id="ct_${tid}" class="t"><div class="pk"><h3>${tab.name}</h3>${tab.html||'<p>محتوایی تنظیم نشده</p>'}</div></div>`;
+            }
+        });
+    }
+
+    // 👑 بخش GOD MODE مدیر
+    if(isAdmin){
+        m += `<div class="god-section">`;
+        m += `<a onclick="shT(event,'appearance')"><i class="fa-solid fa-palette"></i> 🎨 ویرایش ظاهر</a>`;
+        m += `<a onclick="shT(event,'adManage')"><i class="fa-solid fa-sliders"></i> ⚙️ مدیریت گزینه‌ها</a>`;
+        m += `<a onclick="shT(event,'adRoles')"><i class="fa-solid fa-key"></i> 🔑 مدیریت رول‌ها</a>`;
+        m += `<a onclick="shT(event,'adPanels')"><i class="fa-solid fa-table-columns"></i> 🖥️ ویرایش دسترسی</a>`;
+        m += `<a onclick="shT(event,'adTabs')"><i class="fa-solid fa-plus-square"></i> ➕ تب‌های سفارشی</a>`;
+        m += `<a onclick="shT(event,'adStats')"><i class="fa-solid fa-chart-column"></i> 📊 آمار داشبورد</a>`;
+        m += `<a onclick="shT(event,'adSystem')"><i class="fa-solid fa-server"></i> 💣 سیستم</a>`;
+        m += `</div>`;
+
+        // محتوای ویرایش ظاهر
+        const a = SETTINGS.appearance;
+        c += `<div id="appearance" class="t"><div class="pk"><h3><i class="fa-solid fa-palette"></i> استودیو ویرایش ظاهر سایت (زنده)</h3>
+<div class="fg2"><div class="fg"><label>رنگ اصلی</label><input id="appColorMain" type="color" value="${a.colorMain}"></div><div class="fg"><label>رنگ پس‌زمینه</label><input id="appColorBg" type="color" value="${a.colorBg}"></div></div>
+<div class="fg2"><div class="fg"><label>نام هدر سایت</label><input id="appSiteName" value="${a.siteName}"></div><div class="fg"><label>شعار هدر</label><input id="appSlogan" value="${a.slogan}"></div></div>
+<div class="fg"><label>آیکون مهر (FontAwesome)</label><input id="appSealIcon" value="${a.sealIcon}" placeholder="fa-scale-balanced, fa-crown, fa-shield-halved"></div>
+<div class="fg"><label>متن بج بالای هیرو</label><input id="appBadgeText" value="${a.badgeText}"></div>
+<div class="fg"><label>عنوان بزرگ هیرو (می‌توان span داشت)</label><input id="appHeroTitle" value='${a.heroTitle.replace(/'/g,"&apos;")}'></div>
+<div class="fg"><label>توضیحات هیرو</label><textarea id="appHeroDesc" rows="3">${a.heroDesc}</textarea></div>
+<div class="fg2"><div class="fg"><label>متن فوتر</label><input id="appFooterText" value="${a.footerText}"></div><div class="fg"><label>متن سازنده</label><input id="appDevText" value="${a.devText}"></div></div>
+<button class="btn bp bf" onclick="saveAppearance()"><i class="fa-solid fa-globe"></i> ذخیره و انتشار آنلاین</button>
+</div></div>`;
+
+        // مدیریت گزینه‌ها
+        c += `<div id="adManage" class="t">
+<div class="pk"><h3><i class="fa-solid fa-file-lines"></i> انواع گزارش</h3><div style="display:flex;gap:10px"><input id="newRp" placeholder="گزارش جدید..." style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;color:var(--tx);font-family:'Vazirmatn'"><button class="btn bp" onclick="addItem('reportTypes','newRp')">افزودن</button></div><div class="tag-list" id="rpList"></div></div>
+<div class="pk"><h3><i class="fa-solid fa-gavel"></i> انواع پانیشمنت</h3><div style="display:flex;gap:10px"><input id="newPun" placeholder="پانیشمنت جدید..." style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;color:var(--tx);font-family:'Vazirmatn'"><button class="btn bp" onclick="addItem('punTypes','newPun')">افزودن</button></div><div class="tag-list" id="punList"></div></div>
+<div class="pk"><h3><i class="fa-solid fa-ban"></i> انواع جرم بلک‌لیست</h3><div style="display:flex;gap:10px"><input id="newBl" placeholder="جرم جدید..." style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;color:var(--tx);font-family:'Vazirmatn'"><button class="btn bp" onclick="addItem('blTypes','newBl')">افزودن</button></div><div class="tag-list" id="blList"></div></div>
+<div class="pk"><h3><i class="fa-solid fa-building"></i> ارگان‌ها</h3><div style="display:flex;gap:10px"><input id="newOrg" placeholder="ارگان جدید..." style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bd);padding:10px 14px;border-radius:8px;color:var(--tx);font-family:'Vazirmatn'"><button class="btn bp" onclick="addItem('orgs','newOrg')">افزودن</button></div><div class="tag-list" id="orgList"></div></div>
+</div>`;
+
+        // مدیریت رول‌ها
+        c += `<div id="adRoles" class="t">
+<div class="pk"><h3><i class="fa-solid fa-plus"></i> ساخت رول جدید</h3>
+<div class="fg2"><div class="fg"><label>نام رول</label><input id="newRoleName" placeholder="مثلاً: بازرس"></div><div class="fg"><label>شناسه (انگلیسی)</label><input id="newRoleId" placeholder="inspector"></div></div>
+<div class="fg"><label>آیکون</label><input id="newRoleIcon" value="fa-user-shield"></div>
+<label style="font-size:12px;color:var(--g);font-weight:700;margin:10px 0;display:block">دسترسی‌های این رول:</label>
+<div class="perm-grid" id="newPermGrid"></div>
+<button class="btn bp" style="margin-top:15px" onclick="createRole()">ساخت رول</button>
+</div>
+<div class="pk"><h3><i class="fa-solid fa-list"></i> رول‌های موجود</h3><table><thead><tr><th>نام</th><th>شناسه</th><th>آیکون</th><th>دسترسی</th><th>عمل</th></tr></thead><tbody id="rolesList"></tbody></table></div>
+</div>`;
+
+        // ویرایش دسترسی پنل‌ها
+        c += `<div id="adPanels" class="t"><div class="pk"><h3><i class="fa-solid fa-table-columns"></i> ویرایش دسترسی پنل‌ها</h3><div class="fg"><label>انتخاب رول</label><select id="editRoleSel" onchange="loadRoleEdit()"></select></div><div id="roleEditBox"></div></div></div>`;
+
+        // تب‌های سفارشی
+        c += `<div id="adTabs" class="t">
+<div class="pk"><h3><i class="fa-solid fa-plus-square"></i> افزودن تب سفارشی به پنل‌ها</h3>
+<div class="fg2"><div class="fg"><label>نام تب</label><input id="ctName" placeholder="مثلاً: آرشیو"></div><div class="fg"><label>آیکون</label><input id="ctIcon" value="fa-folder-plus"></div></div>
+<div class="fg"><label>برای کدام رول‌ها نمایش داده شود؟</label><div id="ctRoles"></div></div>
+<div class="fg"><label>محتوای HTML (می‌توانی HTML بنویسی)</label><textarea id="ctHtml" rows="6" placeholder='<div class="pk"><h3>عنوان</h3><p>متن...</p></div>'></textarea></div>
+<button class="btn bp" onclick="createTab()">افزودن تب</button>
+</div>
+<div class="pk"><h3><i class="fa-solid fa-list"></i> تب‌های موجود</h3><table><thead><tr><th>نام</th><th>آیکون</th><th>رول‌ها</th><th>عمل</th></tr></thead><tbody id="ctList"></tbody></table></div>
+</div>`;
+
+        // آمار داشبورد
+        c += `<div id="adStats" class="t"><div class="pk"><h3><i class="fa-solid fa-chart-column"></i> ویرایش آمار صفحه اصلی</h3>
+<div class="fg2"><div class="fg"><label>عدد ۱</label><input id="st1n" value="${SETTINGS.stats[0].n}"></div><div class="fg"><label>عنوان ۱</label><input id="st1l" value="${SETTINGS.stats[0].l}"></div></div>
+<div class="fg2"><div class="fg"><label>عدد ۳</label><input id="st3n" value="${SETTINGS.stats[2].n}"></div><div class="fg"><label>عنوان ۳</label><input id="st3l" value="${SETTINGS.stats[2].l}"></div></div>
+<button class="btn bp" onclick="saveStats()">ذخیره آمار</button>
+</div></div>`;
+
+        // سیستم
+        c += `<div id="adSystem" class="t">
+<div class="pk"><h3><i class="fa-solid fa-wrench"></i> حالت تعمیرات</h3>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:15px 0"><div><h4 style="font-size:13px">فعال/غیرفعال سازی سایت</h4><p style="font-size:11px;color:var(--txm);margin-top:5px">فقط مدیر می‌تواند وارد شود</p></div><label class="sw"><input type="checkbox" id="maintToggle" ${SETTINGS.maintenance?'checked':''}><span class="sl2"></span></label></div>
+<button class="btn bp" onclick="saveMaint()">اعمال وضعیت</button>
+</div>
+<div class="pk danger"><h3><i class="fa-solid fa-triangle-exclamation"></i> منطقه خطر</h3>
+<p style="color:var(--txm);font-size:13px;margin-bottom:15px">عملیات زیر غیرقابل بازگشت است!</p>
+<button class="bd" style="padding:10px 18px;font-size:13px" onclick="resetAll()"><i class="fa-solid fa-trash"></i> ریست کامل سامانه (پاک کردن همه داده‌ها)</button>
+</div></div>`;
+    }
+
+    document.getElementById('pMenu').innerHTML = m;
+    document.getElementById('pContent').innerHTML = c;
+
+    if(isAdmin){
+        setTimeout(() => {
+            renderAdminLists(); renderRolesList(); renderCTList(); populateRoleSelect(); populateCTRoles(); populatePermGrid();
+        }, 100);
+    }
+}
+
+function shT(ev, id){
+    document.querySelectorAll('.t').forEach(x=>x.classList.remove('a'));
+    document.getElementById(id).classList.add('a');
+    if(ev && ev.currentTarget){
+        ev.currentTarget.closest('.sm').querySelectorAll('a').forEach(a=>a.classList.remove('a'));
+        ev.currentTarget.classList.add('a');
+    }
+}
+
+function listenLive(){
+    const r = cu.role;
+    const isAdmin = r === 'admin';
+    const roleInfo = SETTINGS.roles[r] || {perms:[]};
+    const perms = roleInfo.perms || [];
+    const has = p => isAdmin || perms.includes('all') || perms.includes(p);
+
+    db.ref('users').on('value', s => {
+        const users = s.val() || {};
+        let active = 0;
+        const pTbl = document.getElementById('pendTbl');
+        const aTbl = document.getElementById('allUsersTbl');
+        if(pTbl) pTbl.innerHTML = '';
+        if(aTbl) aTbl.innerHTML = '';
+        const rolesOpt = Object.keys(SETTINGS.roles).filter(k=>k!=='admin').map(k=>`<option value="${k}">${SETTINGS.roles[k].name}</option>`).join('');
+
+        for(let k in users){
+            const u = users[k];
+            if(!u.approved && pTbl){
+                pTbl.innerHTML += `<tr><td>${u.ic}</td><td>${u.oc}</td><td>${u.org}</td><td>${u.rank}</td><td><select id="r_${u.un}">${rolesOpt}</select></td><td><button class="bs" onclick="approve('${u.un}')">تایید</button></td></tr>`;
+            } else if(u.approved){
+                active++;
+                if(aTbl){
+                    const roleName = SETTINGS.roles[u.role] ? SETTINGS.roles[u.role].name : u.role;
+                    aTbl.innerHTML += `<tr><td>${u.ic}</td><td>${u.oc}</td><td>${u.org}</td><td>${u.rank}</td><td><select id="ch_${u.un}">${rolesOpt.replace(`value="${u.role}"`, `value="${u.role}" selected`)}</select></td><td><button class="bs" onclick="changeRole('${u.un}')">تغییر</button> ${u.role!=='admin'?`<button class="bd" onclick="delUser('${u.un}')">حذف</button>`:''}</td></tr>`;
+                }
+            }
+        }
+        if(document.getElementById('liveUserStat')) document.getElementById('liveUserStat').innerText = active;
+    });
+
+    db.ref('cases').on('value', s => renderT('casesTbl', s.val(), ['title','by','date'], 'cases', has('cases_edit')||isAdmin));
+    db.ref('inter').on('value', s => renderT('interTbl', s.val(), ['title','by','date'], 'inter', has('inter_edit')||isAdmin));
+    db.ref('reports').on('value', s => renderT('reportsTbl', s.val(), ['type','title','by'], 'reports', has('reports_edit')||isAdmin));
+    db.ref('punishments').on('value', s => renderT('punTbl', s.val(), ['user','type','desc','by'], 'punishments', false));
+    db.ref('blacklist').on('value', s => renderT('blTbl', s.val(), ['user','type','desc','by'], 'blacklist', false));
+    db.ref('tickets').on('value', s => {
+        const tb = document.getElementById('ticketsTbl'); if(!tb) return;
+        tb.innerHTML = ''; const data = s.val() || {};
+        for(let k in data){const t = data[k]; tb.innerHTML += `<tr><td>${t.by}</td><td>${t.sub}</td><td>${t.msg}</td><td>${t.reply||'—'}</td><td><button class="ba" onclick="reply('${k}')">پاسخ</button></td></tr>`;}
+    });
+
+    db.ref('settings').on('value', s => {
+        const newS = s.val();
+        if(newS){
+            SETTINGS = newS;
+            if(!SETTINGS.customTabs) SETTINGS.customTabs = {};
+            applyAppearance();
+        }
+    });
+}
+
+function renderT(id, data, fields, path, edit){
+    const tb = document.getElementById(id); if(!tb) return; tb.innerHTML = '';
+    const d = data || {}; let i = 1;
+    for(let k in d){
+        let tr = `<td>#${i++}</td>`;
+        fields.forEach(f => tr += `<td>${d[k][f]||'—'}</td>`);
+        if(edit) tr += `<td><button class="bedit" onclick="editI('${path}','${k}')">ویرایش</button></td>`;
+        tb.innerHTML += `<tr>${tr}</tr>`;
+    }
+}
+
+function saveD(p, tI, dI, sI){
+    const title = document.getElementById(tI).value;
+    const desc = document.getElementById(dI).value;
+    const type = sI ? document.getElementById(sI).value : null;
+    if(!title || !desc){alert('فیلدها را پر کنید'); return;}
+    db.ref(p).push({title, desc, type, user: title, by: cu.ic, date: new Date().toLocaleDateString('fa-IR')}).then(() => {
+        alert('ثبت شد ✅');
+        document.getElementById(tI).value = ''; document.getElementById(dI).value = '';
+    });
+}
+
+function approve(un){
+    const role = document.getElementById('r_' + un).value;
+    db.ref('users/' + un).update({approved: true, role: role}).then(() => alert('تایید شد ✅'));
+}
+function changeRole(un){
+    const role = document.getElementById('ch_' + un).value;
+    db.ref('users/' + un).update({role: role}).then(() => alert('رول تغییر کرد ✅'));
+}
+function delUser(un){if(confirm('حذف کاربر؟')) db.ref('users/' + un).remove();}
+
+function editI(p, k){
+    db.ref(p + '/' + k).once('value', s => {
+        const v = s.val();
+        const h = `<h3><i class="fa-solid fa-edit"></i> ویرایش</h3><div class="fg"><label>عنوان</label><input id="eT" value="${v.title||v.user||''}"></div><div class="fg"><label>شرح</label><textarea id="eD" rows="6">${v.desc||''}</textarea></div><div class="modal-actions"><button class="btn bo" onclick="closeModal()">لغو</button><button class="btn bp" onclick="saveE('${p}','${k}')">ذخیره</button></div>`;
+        openModal(h);
+    });
+}
+function saveE(p, k){
+    db.ref(p + '/' + k).update({title: document.getElementById('eT').value, desc: document.getElementById('eD').value}).then(() => {closeModal(); alert('ذخیره شد ✅');});
+}
+function reply(k){const r = prompt('پاسخ:'); if(r) db.ref('tickets/' + k).update({reply: r});}
+
+function sendTk(){
+    const sub = document.getElementById('tkSub').value;
+    const msg = document.getElementById('tkMsg').value;
+    if(!sub || !msg){alert('فیلدها را پر کنید'); return;}
+    db.ref('tickets').push({by: cu.ic, sub, msg}).then(() => {alert('ارسال شد ✅'); document.getElementById('tkMsg').value = '';});
+}
+
+function startChat(){
+    db.ref('chat').on('value', s => {
+        const b = document.getElementById('chatBody'); if(!b) return;
+        b.innerHTML = ''; const d = s.val() || {};
+        for(let k in d){const m = d[k]; b.innerHTML += `<div class="msg ${m.un===cu.un?'mine':'other'}"><div class="bub"><b>${m.ic}:</b><br>${m.msg}</div></div>`;}
+        b.scrollTop = b.scrollHeight;
+    });
+}
+function sendChat(){
+    const v = document.getElementById('chatIn').value.trim(); if(!v) return;
+    db.ref('chat').push({un: cu.un, ic: cu.ic, role: cu.role, msg: v});
+    document.getElementById('chatIn').value = '';
+}
+
+// ============ قابلیت‌های GOD MODE مدیر ============
+
+function saveAppearance(){
+    const data = {
+        colorMain: document.getElementById('appColorMain').value,
+        colorBg: document.getElementById('appColorBg').value,
+        siteName: document.getElementById('appSiteName').value,
+        slogan: document.getElementById('appSlogan').value,
+        sealIcon: document.getElementById('appSealIcon').value,
+        badgeText: document.getElementById('appBadgeText').value,
+        heroTitle: document.getElementById('appHeroTitle').value,
+        heroDesc: document.getElementById('appHeroDesc').value,
+        footerText: document.getElementById('appFooterText').value,
+        devText: document.getElementById('appDevText').value
+    };
+    db.ref('settings/appearance').set(data).then(() => {
+        SETTINGS.appearance = data; applyAppearance();
+        alert('🎨 ظاهر سایت زنده منتشر شد!');
+    });
+}
+
+function addItem(key, inpId){
+    const val = document.getElementById(inpId).value.trim();
+    if(!val){alert('مقدار را وارد کنید'); return;}
+    if(!SETTINGS[key]) SETTINGS[key] = [];
+    if(SETTINGS[key].includes(val)){alert('تکراری است'); return;}
+    SETTINGS[key].push(val);
+    db.ref('settings/' + key).set(SETTINGS[key]).then(() => {
+        document.getElementById(inpId).value = '';
+        renderAdminLists(); updateOrgSelect();
+        alert('✅ به صورت زنده اضافه شد');
+    });
+}
+
+function removeItem(key, idx){
+    if(!confirm('حذف؟')) return;
+    SETTINGS[key].splice(idx, 1);
+    db.ref('settings/' + key).set(SETTINGS[key]).then(() => {renderAdminLists(); updateOrgSelect();});
+}
+
+function renderAdminLists(){
+    const lists = {rpList: 'reportTypes', punList: 'punTypes', blList: 'blTypes', orgList: 'orgs'};
+    for(let elId in lists){
+        const el = document.getElementById(elId); if(!el) continue;
+        el.innerHTML = ''; const key = lists[elId];
+        (SETTINGS[key]||[]).forEach((item, i) => {
+            el.innerHTML += `<span class="tag-chip">${item} <button onclick="removeItem('${key}',${i})">×</button></span>`;
+        });
+    }
+}
+
+function populatePermGrid(){
+    const grid = document.getElementById('newPermGrid'); if(!grid) return;
+    grid.innerHTML = '';
+    for(let p in ALL_PERMS){
+        grid.innerHTML += `<div class="perm-item"><input type="checkbox" id="np_${p}" value="${p}"><label for="np_${p}">${ALL_PERMS[p]}</label></div>`;
+    }
+}
+
+function createRole(){
+    const name = document.getElementById('newRoleName').value.trim();
+    const id = document.getElementById('newRoleId').value.trim().toLowerCase();
+    const icon = document.getElementById('newRoleIcon').value.trim() || 'fa-user-shield';
+    if(!name || !id){alert('نام و شناسه الزامی'); return;}
+    if(SETTINGS.roles[id]){alert('این شناسه قبلاً استفاده شده'); return;}
+    const perms = [];
+    document.querySelectorAll('#newPermGrid input:checked').forEach(c => perms.push(c.value));
+    if(!perms.length){alert('حداقل یک دسترسی'); return;}
+    SETTINGS.roles[id] = {name, icon, perms};
+    db.ref('settings/roles').set(SETTINGS.roles).then(() => {
+        document.getElementById('newRoleName').value = '';
+        document.getElementById('newRoleId').value = '';
+        document.querySelectorAll('#newPermGrid input').forEach(c => c.checked = false);
+        renderRolesList(); populateRoleSelect(); populateCTRoles();
+        alert(`✅ رول "${name}" ساخته شد`);
+    });
+}
+
+function renderRolesList(){
+    const tb = document.getElementById('rolesList'); if(!tb) return; tb.innerHTML = '';
+    for(let k in SETTINGS.roles){
+        const r = SETTINGS.roles[k];
+        const isDefault = DEFAULT_ROLES[k] ? true : false;
+        tb.innerHTML += `<tr><td><b>${r.name}</b></td><td>${k}</td><td><i class="fa-solid ${r.icon}"></i></td><td>${r.perms.length}</td><td>${k==='admin'?'—':(isDefault?'پیش‌فرض':`<button class="bd" onclick="delRole('${k}')">حذف</button>`)}</td></tr>`;
+    }
+}
+
+function delRole(id){
+    if(!confirm('حذف رول؟ کاربران این رول به شهروند تبدیل می‌شوند')) return;
+    delete SETTINGS.roles[id];
+    db.ref('settings/roles').set(SETTINGS.roles).then(() => {
+        db.ref('users').once('value', s => {
+            const users = s.val() || {};
+            for(let k in users){if(users[k].role === id) db.ref('users/' + k).update({role: 'citizen'});}
+        });
+        renderRolesList(); populateRoleSelect();
+    });
+}
+
+function populateRoleSelect(){
+    const sel = document.getElementById('editRoleSel'); if(!sel) return;
+    sel.innerHTML = '<option value="">انتخاب رول...</option>';
+    for(let k in SETTINGS.roles){
+        if(k !== 'admin') sel.innerHTML += `<option value="${k}">${SETTINGS.roles[k].name}</option>`;
+    }
+}
+
+function loadRoleEdit(){
+    const roleId = document.getElementById('editRoleSel').value;
+    const box = document.getElementById('roleEditBox');
+    if(!roleId){box.innerHTML = ''; return;}
+    const role = SETTINGS.roles[roleId];
+    let h = `<div style="margin-top:15px"><h3 style="color:var(--g);margin-bottom:15px">دسترسی‌های "${role.name}"</h3><div class="perm-grid">`;
+    for(let p in ALL_PERMS){
+        const checked = role.perms.includes(p) ? 'checked' : '';
+        h += `<div class="perm-item"><input type="checkbox" id="ep_${p}" value="${p}" ${checked}><label for="ep_${p}">${ALL_PERMS[p]}</label></div>`;
+    }
+    h += `</div><button class="btn bp" style="margin-top:15px" onclick="saveRolePerms('${roleId}')"><i class="fa-solid fa-save"></i> ذخیره دسترسی‌ها</button></div>`;
+    box.innerHTML = h;
+}
+
+function saveRolePerms(roleId){
+    const perms = [];
+    document.querySelectorAll('#roleEditBox input:checked').forEach(c => perms.push(c.value));
+    SETTINGS.roles[roleId].perms = perms;
+    db.ref('settings/roles/' + roleId + '/perms').set(perms).then(() => alert('✅ دسترسی‌ها ذخیره شد'));
+}
+
+function populateCTRoles(){
+    const box = document.getElementById('ctRoles'); if(!box) return;
+    let html = '<div class="perm-grid">';
+    for(let k in SETTINGS.roles){
+        if(k === 'admin') continue;
+        html += `<div class="perm-item"><input type="checkbox" id="ctr_${k}" value="${k}"><label for="ctr_${k}">${SETTINGS.roles[k].name}</label></div>`;
+    }
+    html += '</div>';
+    box.innerHTML = html;
+}
+
+function createTab(){
+    const name = document.getElementById('ctName').value.trim();
+    const icon = document.getElementById('ctIcon').value.trim() || 'fa-plus';
+    const html = document.getElementById('ctHtml').value;
+    if(!name){alert('نام تب الزامی'); return;}
+    const roles = [];
+    document.querySelectorAll('#ctRoles input:checked').forEach(c => roles.push(c.value));
+    if(!roles.length){alert('حداقل یک رول انتخاب کنید'); return;}
+    const tid = 't' + Date.now();
+    if(!SETTINGS.customTabs) SETTINGS.customTabs = {};
+    SETTINGS.customTabs[tid] = {name, icon, html, roles};
+    db.ref('settings/customTabs').set(SETTINGS.customTabs).then(() => {
+        document.getElementById('ctName').value = '';
+        document.getElementById('ctHtml').value = '';
+        document.querySelectorAll('#ctRoles input').forEach(c => c.checked = false);
+        renderCTList();
+        alert('✅ تب جدید اضافه شد');
+    });
+}
+
+function renderCTList(){
+    const tb = document.getElementById('ctList'); if(!tb) return; tb.innerHTML = '';
+    if(!SETTINGS.customTabs || !Object.keys(SETTINGS.customTabs).length){
+        tb.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--txm)">هیچ تبی ساخته نشده</td></tr>'; return;
+    }
+    for(let tid in SETTINGS.customTabs){
+        const t = SETTINGS.customTabs[tid];
+        const roleNames = t.roles.map(r => SETTINGS.roles[r] ? SETTINGS.roles[r].name : r).join('، ');
+        tb.innerHTML += `<tr><td><b>${t.name}</b></td><td><i class="fa-solid ${t.icon}"></i></td><td>${roleNames}</td><td><button class="bd" onclick="delTab('${tid}')">حذف</button></td></tr>`;
+    }
+}
+
+function delTab(tid){
+    if(!confirm('حذف تب؟')) return;
+    delete SETTINGS.customTabs[tid];
+    db.ref('settings/customTabs').set(SETTINGS.customTabs).then(() => renderCTList());
+}
+
+function saveStats(){
+    SETTINGS.stats[0] = {n: document.getElementById('st1n').value, l: document.getElementById('st1l').value};
+    SETTINGS.stats[2] = {n: document.getElementById('st3n').value, l: document.getElementById('st3l').value};
+    db.ref('settings/stats').set(SETTINGS.stats).then(() => {applyAppearance(); alert('✅ آمار ذخیره شد');});
+}
+
+function saveMaint(){
+    const chk = document.getElementById('maintToggle').checked;
+    db.ref('settings/maintenance').set(chk).then(() => {
+        SETTINGS.maintenance = chk;
+        alert(chk ? '⚠️ حالت تعمیرات فعال شد' : '✅ حالت تعمیرات غیرفعال شد');
+    });
+}
+
+function resetAll(){
+    if(!confirm('⚠️ تمام داده‌ها پاک شود؟ غیرقابل بازگشت!')) return;
+    if(!confirm('⚠️ تایید نهایی؟')) return;
+    db.ref('/').set(null).then(() => {alert('✅ ریست شد'); setTimeout(() => location.reload(), 500);});
+}
+
+function openModal(html){document.getElementById('modalBox').innerHTML = html; document.getElementById('modal').classList.add('a');}
+function closeModal(){document.getElementById('modal').classList.remove('a');}
+function logout(){cu = null; sv('landing');}
+
+window.onload = function(){
+    loadSettings(() => {
+        db.ref('users').on('value', s => {
+            let count = 0; const users = s.val() || {};
+            for(let k in users) if(users[k].approved) count++;
+            if(document.getElementById('liveUserStat')) document.getElementById('liveUserStat').innerText = count;
+        });
+    });
+};
+</script>
+</body>
+</html>
